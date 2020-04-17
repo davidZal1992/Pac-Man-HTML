@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'packFont';
+    src: url(../../assets/fonts/PAC-FONT.TTF);
+  }
+
+  body{
+    height: 90vh;
+    background: url("../../assets/img/welcomeBackground.jpg") no-repeat center center/cover;
+    width: 100%;
+    text-align: center;
+    font-family: 'packFont';
+}
+.box {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  padding-top: 65vh;
+}
+
+.btn1{
+  width: 265px;
+  background: transparent;
+  font-family: 'packFont';
+  font-size:38px;
+  color:white;
+  outline: none;
+  border:none;
+  cursor: pointer;
+}
+
+.btn2{
+  width: 220px;
+  margin-top: 3%;
+  background: transparent;
+  font-family: 'packFont';
+  font-size:38px;
+  color:yellow;
+  border:none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn1:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  rotate: 4px;
+}
+.btn2:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
