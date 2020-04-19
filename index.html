@@ -2,56 +2,108 @@
 <html>
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
-
-
-		<link rel="stylesheet" type="text/css" href="Pages/Register/Register.css">
-		<link rel="stylesheet" type="text/css" href="Pages/Welcome/Welcome.css">
-
 		
 		<script type="text/javascript" src="./app.js"></script>
 		<script type="text/javascript" src="./Pages/Welcome/welcome.js"></script>
+		<script type="text/javascript" src="./Pages/Register/Register.js"></script>
+		<script type="text/javascript" src="./Components/Header/header.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="style.css"> 
+
+		<script src="https://kit.fontawesome.com/331eb2463a.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+
+
+		<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+		<link href="./assets/fonts/PAC-FONT.TTF" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
 	</head>
 
 	<body>
-
-
-		<!-- Welcome page div -->
-		<div class="welcomePage" id="welcome">
-			<div class="box">
-			<button class="btn1" id="button1">Register</button>
-			<button class="btn2" id="button2">Login</button>
+		<!-- Logo+Nav+menu-->
+		<div class="box" id="box">
+			<div class="logo" id="logo">
+				<img class="header" src="./assets/img/logo.png" alt="pacslogo">
 			</div>
-		</div>
-		</div>
-		
-/		<!-- Register page div -->
-<div class="registerPage" id="register">
-<div class="wrapper">
-	<div class="header-area">
-		<h2 style="font-family: 'packFont';">Pac-Man</h2>
-		<p>Suscribe to our Social Profile</p>
-   </div>
-	<div class="social-area">
-			<i class="fa fa-facebook"></i>
-			<i class="fa fa-linkedin"></i>
-			<i class="fa fa-twitter"></i>
-   </div>
-	<div class="form-area">
-			<i class="fa fa-user"></i>
-			<input type="text" placeholder="Enter Username"/>
-			<i class="fas fa-user-edit"></i>
-			<input type="text" placeholder="Enter Name"/>
-			<i class="fa fa-envelope"></i>
-			<input type="email" placeholder="Enter Email Address"/>
-			<i class="fa fa-key"></i>
-			<input type="password" placeholder="Enter Password"/>
-			<i class="far fa-calendar-alt"></i>
-			<input placeholder="Date" type="text" onfocus="(this.type='date')" id="date">
-			<input type="submit" value="Register"/>
-	</div>
-</div>
-</div>
+			<div class="navbar" id="navbar">
+					<div class="inner"><button type="submit" class="msgBtn" id="homePage">Home</button></div>
+					<div class="inner"><button type="submit" class="msgBtn" id="registerPage">Register</button></div>
+					<div class="inner"><button type="submit" class="msgBtn" id="loginPage"  >Login</button></div>
+					<div class="inner"><button class="msgBtn">About</button></div>
+			</div>
+			
 
+		<!-- Welcome page div -->	
+		<div id="welcome">
+			<p class="headdes">Welcome to our P-game <br>Think you are good player? <br>lets play!</p>
+			<button class="btn1" id="button1">Register</button>
+			<img class="logopac" src="./assets/img/logopac.png" alt="pacslogo">
+			<button class="btn1" id="button2">Login</button>
+		</div>
+
+
+		<!-- Register page div -->
+		<div class="registerPage" id="register">
+			<form  class="form" id="form">
+				<div class="form-group">
+				  <i class="fas fa-user"></i>
+				  <input type="text" placeholder="Full name" id="name" name="name"/>
+				  <small class="form-text" id="invalid-name">
+					&nbsp 
+				  </small>
+				</div>
+				  <div class="form-group">
+					<i class="fas fa-user-tie"></i>
+					<input type="text" placeholder="User name" id="username" name="username" />
+					<small class="form-text" id="invalid-username">
+						&nbsp 
+					</small>
+				</div>
+				<div class="form-group">
+					<i class="fas fa-envelope"></i>
+				  <input  name="email" type="email" placeholder="Email Address" id="email" />
+				  <small class="form-text" id="invalid-email">
+					&nbsp 
+				  </small>
+				</div>
+				<div class="form-group">
+					<i class="fas fa-unlock-alt"></i>
+				  <input type="password" placeholder="Password" name="password" id="password"  />
+				  <small class="form-text" id="invalid-password">
+					&nbsp 
+				  </small>
+				</div>
+				<div class="form-group">
+					<i class="fas fa-table"></i>
+				  <input type="text" onfocus="(this.type='date')" id="date" placeholder="Date of birth"  name="date"/>
+				  <small class="form-text" id="invalid-date">
+					&nbsp 
+				  </small>
+				</div>
+				<input style="margin-top: 7vh;" type="submit" value="Register" class="btn1" />
+			  </form>
+	  </div>
+	  		<!-- Login Div -->
+			  <div class="loginPage" id="login">
+				<form  class="form" id="form">
+					  <div class="form-group">
+						<i class="fas fa-user-tie"></i>
+						<input type="text" placeholder="User name" id="username" name="username" />
+						<small class="form-text" id="invalid-username">
+							&nbsp 
+						</small>
+					</div>
+					<div class="form-group">
+						<i class="fas fa-unlock-alt"></i>
+					  <input type="password" placeholder="Password" name="password" id="password"  />
+					  <small class="form-text" id="invalid-password">
+						&nbsp 
+					  </small>
+					</div>
+					<input style="margin-top: 7vh;" type="submit" value="Login" class="btn1" />
+				  </form>
+		  </div>
 			<!-- appGame div -->
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
@@ -64,6 +116,17 @@
 		<div id="game">
 			<canvas id="canvas" height="600" width="600"></canvas>
 		</div>
+	</div>
+
+
+			<!-- Footer div -->
+	<div class="footer" id="footer">
+		<p class="desfooter" id="desfooter">This pac-man designed by <br> David Zaltsman & Matan Gadasi </p>
+		<div class="items">
+		<p style="margin-left: 10px;"class="contact" id="desfooter">David Zaltsman <br> <i class="fa fa-linkedin" id="lkdin"></i><i class="fa fa-facebook" id="facebook"></i><i id="github" class="fa fa-github"></i><i class="fa fa-envelope" id="mail"></i></p>
+		<p  class="contact" id="desfooter">Matan Gadasi&nbsp <br> <i class="fa fa-linkedin" id="lkdin"></i><i class="fa fa-facebook" id="facebook"></i><i id="github" class="fa fa-github"></i><i class="fa fa-envelope" id="mail"></i></p>
+		</div>
+	</div>
 	</body>
 
 

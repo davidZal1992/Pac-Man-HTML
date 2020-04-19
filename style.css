@@ -1,0 +1,244 @@
+@font-face {
+    font-family: 'packFont';
+    src: url(./assets/fonts/PAC-FONT.TTF);
+  }
+@font-face {
+    font-family: 'bubble';
+    src: url(./assets/fonts/bubble\ &\ soap.ttf);
+  }
+
+  @font-face {
+    font-family: 'bubble';
+    src: url(./assets/fonts/bubble\ &\ soap.ttf);
+  }
+  
+body{
+    flex:1;
+}
+.box{
+    text-align: center;
+    background-image: url("./assets/img/Backround.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 95vh;
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 0px;
+    border:black solid;
+    border-bottom: none;
+}
+
+.headdes{
+    font-family: 'bubble';
+    font-size: 38px;
+    color:#fff;
+}
+.header{
+ width:25vw;
+ height: 10vh;
+ margin-top: 10px
+}
+#navbar
+{
+    width:100%;
+    text-align: center;
+}
+.inner
+{
+ display: inline-block;
+  background: transparent;
+  font-family: 'packFont';
+  font-size:38px;
+  color:white;
+  outline: none;
+  border:none;
+  cursor: pointer;
+
+}
+
+.msgBtn{
+    display: inline-block;
+    font-family: 'bubble';
+    margin:20px;
+    font-size:38px;
+    color:white;
+    outline: none;
+    border:none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    background-color: skyblue;
+    
+}
+
+.msgBtn:hover {background-color: rgba(0,0,0,0.3);}
+
+.msgBtn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.logopac{
+    width:100px;
+    height: 100px;
+    margin:10px;
+}
+
+/* General button style */
+.btn1{
+display:inline-block;
+top:-3rem;
+padding:0.7em 1.4em;
+margin:0 0.3em 0.3em 0;
+border-radius:0.15em;
+box-sizing: border-box;
+text-decoration:none;
+font-family:'bubble';
+font-size:20px;
+text-transform:uppercase;
+font-weight:400;
+color:#FFFFFF;
+background-color:orange;
+box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+text-align:center;
+position:relative;
+cursor:pointer;
+    }
+
+
+
+label{
+    text-align: left;
+    box-sizing: border-box;
+    font-size:25px;
+    color:white;
+    font-family: 'bubble';
+}
+
+.error {
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+ }
+ 
+ .form{
+    margin: 0 auto;
+    margin-top:3rem;
+ }
+ .form-group{
+      margin: 0.5rem 0;
+      margin-left:30%;
+ }
+
+ .form-group i{
+     display: inline-block;
+     position: absolute;
+     left:33%;
+     margin-top:0.5rem;
+     color:#fff;
+     font-size:25px;
+ }
+.form-text{
+    
+      align-items: center;
+      margin-right: 20rem;
+      display: block;
+      margin-top:0.7vh;
+      text-align: center;
+      color: #888;
+      left:0;
+    }
+  
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='date']{
+      text-align: center;
+      display: block;
+      width: 50%;
+      padding: 0.4rem;
+      font-size: 1.2rem;
+      
+      border:none;
+      border-bottom: 3px solid white;
+      background-color:transparent;
+      font-family: 'bubble';
+      color:white;
+      outline: none;
+    }
+  
+    input::-webkit-input-placeholder{
+        color:White;
+        font-size:28px;
+    }
+
+    .footer{
+        background:  linear-gradient(
+            rgba(0, 0, 0, 0.4), 
+            rgba(0, 0, 0, 0.4)
+          ), url("./assets/img/Backround.jpg");
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        width: 70%;
+        margin: 0 auto;
+        margin-bottom: 0px;
+        border:black solid;
+        border-top:none;
+        font-family: 'Comic Neue', cursive;
+        color:White;
+        font-size:25px;
+    }
+
+    .desfooter{
+        text-align: center;
+        margin:0 auto;
+        border-top:none;
+        border-radius: 25px;
+    }
+
+    .items{
+        display: flex;
+        justify-content: space-between;
+    }
+    .contact{
+        margin-left: 5px;
+        justify-content: space-between;
+    }
+
+    .contact i{
+        width:  30px;
+        height: 30px;
+        padding-top: 5px;
+        margin: 0 2px;
+        font-size:30px;
+        margin-left: 5px;
+        box-shadow:  1px 1px 5px rgba(0,0,0,0.5);
+        color:white;
+    }
+
+    #lkdin{
+        background:  #0e70e0;
+    }
+    
+    #facebook{
+        background: blue ;
+    }
+
+    #github{
+        background: black ;
+    }
+    #mail{
+        background: red;
+    }

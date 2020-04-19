@@ -1,16 +1,20 @@
 
 $(document).ready(function() {
-    $('body > :not(#welcome)').hide();  // hide everything that isn't #myDiv
-$('#welcome').appendTo('body'); 
-$('body').removeClass().addClass('welcomePage');
+    $('#box').children().hide();
+    $('#logo').show();
+    $('#navbar').show();
+    $('#welcome').show();
+    $('#wfooter').show();
 
+    $( "#button1" ).click(function() {
+        $('#welcome').hide();
+        $('#register').show();
+      });
 
-$( "#button1" ).click(function() {
-
-    $('body > :not(#register)').hide();
-
-  });
-
+      $( "#button2" ).click(function() {
+        $('#welcome').hide();
+        $('#login').show();
+      });
 });
 
  
