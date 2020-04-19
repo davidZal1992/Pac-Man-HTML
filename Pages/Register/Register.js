@@ -11,7 +11,7 @@ jQuery.validator.addMethod("lettersNumbers", function(value, element) {
 
 
 
-    $('#form').validate({
+    $('#formreg').validate({
         rules: {
         email:{
             required:true,
@@ -37,9 +37,42 @@ jQuery.validator.addMethod("lettersNumbers", function(value, element) {
     },
         errorPlacement: function(error, element) {
             error.appendTo('#invalid-' + element.attr('id'));
-            console.log(element.attr('id'))
         }
 
 });
 }
 )
+
+var userAuth={
+    'userName':'',
+    'fullName':'',
+    'email':'',
+    'password':'',
+    'date':''
+}
+
+
+//if all input valid so register user
+$(document).ready(function(e){
+
+$('#formreg').submit(function(){
+    if ($(this).valid() !== true) {
+    }
+    else{
+   userAuth['email']=($('#email').val());
+   userAuth['userName']=($('#username').val());
+   userAuth['name']=($('#name').val());
+   userAuth['password']=($('#password').val());
+   userAuth['date']=($('#date').val());
+   users.push(userAuth);
+   console.log(userAuth)
+   console.log(users)
+   localStorage.setItem('users',JSON.stringify(users))
+    $('#box').children().hide();
+    $('#logo').show();
+    $('#navbar').show();
+    $('#performence').show();
+    }
+    return false;
+});
+});

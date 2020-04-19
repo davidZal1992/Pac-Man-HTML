@@ -1,4 +1,6 @@
 
+
+
 $(document).ready(function() {
     $('#box').children().hide();
     $('#logo').show();
@@ -18,3 +20,16 @@ $(document).ready(function() {
 });
 
  
+var users=  JSON.parse(localStorage.getItem('users'));
+console.log(users)
+if(!users)
+{
+    users=[{'userName':'p','password':'p'}]
+}
+else{
+    let found=users.find(user => user.userName==='p')
+    if(!found)
+    {
+        users.push(pUser)
+    }
+}

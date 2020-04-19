@@ -2,22 +2,26 @@
 <html>
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
-		
+		<!--all Pages js-->
 		<script type="text/javascript" src="./app.js"></script>
 		<script type="text/javascript" src="./Pages/Welcome/welcome.js"></script>
 		<script type="text/javascript" src="./Pages/Register/Register.js"></script>
 		<script type="text/javascript" src="./Components/Header/header.js"></script>
+		<script type="text/javascript" src="./Pages/Login/login.js"></script>
+
 
 		<link rel="stylesheet" type="text/css" href="style.css"> 
-
+		<!--jquery validate import-->
 		<script src="https://kit.fontawesome.com/331eb2463a.js" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
-
-
+		<!--jQuery modal-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+		<!-- fonts styles-->
 		<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 		<link href="./assets/fonts/PAC-FONT.TTF" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
 	</head>
 
 	<body>
@@ -30,7 +34,24 @@
 					<div class="inner"><button type="submit" class="msgBtn" id="homePage">Home</button></div>
 					<div class="inner"><button type="submit" class="msgBtn" id="registerPage">Register</button></div>
 					<div class="inner"><button type="submit" class="msgBtn" id="loginPage"  >Login</button></div>
-					<div class="inner"><button class="msgBtn">About</button></div>
+					
+					<div class="inner">
+						<a href="#ex1" rel="modal:open" class="msgBtn">About</a>
+						<div id="ex1" class="modal">
+							<p>This app was designed and developed by:<br> <strong>Matan Gadasi</strong> and <strong>David Zaltsman</strong><br>
+							as course project exercise.<br><br>
+							
+							<strong>Version 1.0.0</strong><br><br>
+							Plugins used: <br>
+							• jQuery validation: 	<a href=http://www.jquerybyexample.net/2012/06/jquery-string-functions.html>jQuery Validtion</a><br>
+							• Pop up modal: <a href="http://jquerytools.org">jQuery tools</a><br><br>
+							Contact:<br>
+							David Zaltsman: davidzal@post.bgu.ac.il<br>
+							Matan Gadasi: mata@post.bgu.ac.il
+						</p>
+							<a href="#" style="margin-top: 5rem;"class="btn1" rel="modal:close">Close</a>
+						</div>
+				    </div>
 			</div>
 			
 
@@ -45,7 +66,7 @@
 
 		<!-- Register page div -->
 		<div class="registerPage" id="register">
-			<form  class="form" id="form">
+			<form  class="form" id="formreg" >
 				<div class="form-group">
 				  <i class="fas fa-user"></i>
 				  <input type="text" placeholder="Full name" id="name" name="name"/>
@@ -81,29 +102,38 @@
 					&nbsp 
 				  </small>
 				</div>
-				<input style="margin-top: 7vh;" type="submit" value="Register" class="btn1" />
+				<input style="margin-top: 7vh;" type="submit" value="Register" class="btn1" id='submit' />
 			  </form>
 	  </div>
 	  		<!-- Login Div -->
 			  <div class="loginPage" id="login">
-				<form  class="form" id="form">
+				<form  class="form" id="formlogin">
+					<p class="loginError" id="errormsg">
+						&nbsp 
+					</p>
 					  <div class="form-group">
 						<i class="fas fa-user-tie"></i>
-						<input type="text" placeholder="User name" id="username" name="username" />
-						<small class="form-text" id="invalid-username">
+						<input type="text" placeholder="User name" id="usernamelog" name="username" />
+						<small class="form-text" id="invalid-usernamelog">
 							&nbsp 
 						</small>
-					</div>
+					    </div>
 					<div class="form-group">
 						<i class="fas fa-unlock-alt"></i>
-					  <input type="password" placeholder="Password" name="password" id="password"  />
-					  <small class="form-text" id="invalid-password">
+					  <input type="password" placeholder="Password" name="password" id="passwordlog"  />
+					  <small class="form-text" id="invalid-passwordlog">
 						&nbsp 
 					  </small>
 					</div>
 					<input style="margin-top: 7vh;" type="submit" value="Login" class="btn1" />
 				  </form>
 		  </div>
+
+		  <!-- performence Div -->
+		  <div class="setting" id="settings">
+
+		  </div>
+		  
 			<!-- appGame div -->
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
@@ -124,7 +154,7 @@
 		<p class="desfooter" id="desfooter">This pac-man designed by <br> David Zaltsman & Matan Gadasi </p>
 		<div class="items">
 		<p style="margin-left: 10px;"class="contact" id="desfooter">David Zaltsman <br> <i class="fa fa-linkedin" id="lkdin"></i><i class="fa fa-facebook" id="facebook"></i><i id="github" class="fa fa-github"></i><i class="fa fa-envelope" id="mail"></i></p>
-		<p  class="contact" id="desfooter">Matan Gadasi&nbsp <br> <i class="fa fa-linkedin" id="lkdin"></i><i class="fa fa-facebook" id="facebook"></i><i id="github" class="fa fa-github"></i><i class="fa fa-envelope" id="mail"></i></p>
+		<p  class="contact" id="desfooter">Matan Gadasi&nbsp <br> <i  class="fa fa-linkedin" id="lkdin"><a href="https://www.linkedin.com/in/davidzalts/"></a></i><i href="https://www.facebook.com/david.zaltsman" class="fa fa-facebook" id="facebook"></i><i id="github" href="https://github.com/davidZal1992" class="fa fa-github"></i><i class="fa fa-envelope" id="mail"></i></p>
 		</div>
 	</div>
 	</body>

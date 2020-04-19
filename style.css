@@ -165,7 +165,7 @@ label{
       display: block;
       width: 50%;
       padding: 0.4rem;
-      font-size: 1.2rem;
+      font-size: 28px;
       
       border:none;
       border-bottom: 3px solid white;
@@ -196,7 +196,7 @@ label{
         margin-bottom: 0px;
         border:black solid;
         border-top:none;
-        font-family: 'Comic Neue', cursive;
+        font-family: 'Noto Sans JP', sans-serif;
         color:White;
         font-size:25px;
     }
@@ -219,6 +219,7 @@ label{
 
     .contact i{
         width:  30px;
+        cursor: pointer;
         height: 30px;
         padding-top: 5px;
         margin: 0 2px;
@@ -241,4 +242,30 @@ label{
     }
     #mail{
         background: red;
+    }
+
+    .modal{
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 24px;
+        background-color: blueviolet;
+    }
+
+    @-webkit-keyframes autofill {
+        0%,100% {
+            color:white;
+            background: transparent;
+        }
+    }
+
+    input:-webkit-autofill {
+        -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+        -webkit-animation-name: autofill;
+        -webkit-animation-fill-mode: both;
+    }
+
+    .loginError{
+        color: red;
+        font-family: 'Noto Sans JP', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
     }
