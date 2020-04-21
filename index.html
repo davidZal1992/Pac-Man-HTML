@@ -8,7 +8,7 @@
 		<script type="text/javascript" src="./Pages/Register/Register.js"></script>
 		<script type="text/javascript" src="./Components/Header/header.js"></script>
 		<script type="text/javascript" src="./Pages/Login/login.js"></script>
-
+		<script type="text/javascript" src="./Pages/Performence/performence.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="style.css"> 
 		<!--jquery validate import-->
@@ -131,7 +131,77 @@
 
 		  <!-- performence Div -->
 		  <div class="setting" id="settings">
-
+			<form   style="text-align: left; margin-left:2.5rem;" class="form-settings" id="formsettings">
+				<div class="column">
+					<p style="margin-left:1rem;" class="headdes">Move keys:</p>
+					<div class=form-group-settings>
+					<i class="fas fa-arrow-up"></i>
+					<input class="moveup" type="text" placeholder="Press key for Up move" id="textset" name="upmove" />
+					</div>
+					<div class=form-group-settings>
+					<i class="fas fa-arrow-down"></i>
+					<input class="movedown" type="text" placeholder="Press key for Down move" id="textset" name="downmove" />
+					</div>
+					<div class=form-group-settings>
+					<i class="fas fa-arrow-right"></i>
+					<input class="moveright" type="text" placeholder="Press key for Right move" id="textset" name="rightmove" />
+					</div>
+					<div class=form-group-settings>
+					<i class="fas fa-arrow-left"></i>
+					<input class="moveleft" type="text" placeholder="Press key for Left move" id="textset" name="leftmove" />
+					</div>
+					<small class="form-setting" id="invalid-textset">
+						&nbsp 
+					   </small>
+				</div>
+				<div class="column">
+					<div class=form-group-settings>
+					<p  class="headdes">Timer:</p>
+					<i class="fas fa-clock"></i>
+					<span style="font-size: 25px; font-family:bubble; color:white;"> Set time for game (sec):</span>
+					<input type="number" placeholder=" -" id="timer" name="timer" />
+					<small style="margin-top:5px;" class="form-setting" id="invalid-timer">
+						 &nbsp 
+						</small>
+					</div>
+					<div class=form-group-settings>
+						<p  class="headdes">Random:</p>
+						<i class="fas fa-random"></i>
+						<span style="font-size: 25px; font-family:bubble; color:white;"> Randomize Settings:</span>
+						<button type="button" formnovalidate="formnovalidate" class="random" id="random">Random!</button>
+						</div>
+					</div>
+				<div class="center">
+					<div class=form-group-settings>
+						<p class="header2" >Structre:</p>
+						<small style="margin-top:5px;" class="form-setting" id="invalid-ball">
+							&nbsp 
+							</small>
+					<span style="font-size: 25px; font-family:bubble; color:white;">Choose number of balls(50-90):</span>
+					<input type="number" placeholder=" 0" id="ball" name="ball" />
+					</div>
+					<div class=form-group-settings>
+						<small class="form-setting" id="invalid-monster">
+							&nbsp 
+							</small>
+						<span style="font-size: 25px; font-family:bubble; color:white;">Choose number of Monsters(1-4):</span>
+						<input type="number" placeholder=" 0" id="monster" name="monster" />
+						</div>
+					<div class=form-group-settings>
+						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 5 Points balls:</span>
+						<input type="color" placeholder=" 0" id="5balls" name="balls" />
+					</div>
+					<div class=form-group-settings>
+						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 15 Points balls:</span>
+						<input type="color" placeholder=" 0" id="15balls" name="balls" />
+					</div>
+					<div class=form-group-settings>
+						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 25 Points balls:</span>
+						<input type="color" placeholder=" 0" id="25balls" name="balls" />
+					</div>
+					<input  style="text-align: right; top:-60px; display: inline-block; margin-left: 80%;"type="submit" class="btn1" value="start"></input>
+				</div>
+			</form>
 		  </div>
 		  
 			<!-- appGame div -->
@@ -151,11 +221,11 @@
 
 			<!-- Footer div -->
 	<div class="footer" id="footer">
-		<p class="desfooter" id="desfooter">This pac-man designed by <br> David Zaltsman & Matan Gadasi </p>
 		<div class="items">
 		<p style="margin-left: 10px;"class="contact" id="desfooter">David Zaltsman <br> <i class="fa fa-linkedin" id="lkdin"></i><i class="fa fa-facebook" id="facebook"></i><i id="github" class="fa fa-github"></i><i class="fa fa-envelope" id="mail"></i></p>
 		<p  class="contact" id="desfooter">Matan Gadasi&nbsp <br> <i  class="fa fa-linkedin" id="lkdin"><a href="https://www.linkedin.com/in/davidzalts/"></a></i><i href="https://www.facebook.com/david.zaltsman" class="fa fa-facebook" id="facebook"></i><i id="github" href="https://github.com/davidZal1992" class="fa fa-github"></i><i class="fa fa-envelope" id="mail"></i></p>
 		</div>
+		<p  class="desfooter" id="desfooter">This pac-man designed by <br> David Zaltsman & Matan Gadasi </p>
 	</div>
 	</body>
 

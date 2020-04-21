@@ -36,7 +36,7 @@ $(document).ready(function(e){
                     $('#box').children().hide();
                     $('#logo').show();
                      $('#navbar').show();
-                     $('#performance').show();
+                     $('#settings').show();
                      return false;
                   }   
             else{

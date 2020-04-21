@@ -6,7 +6,7 @@ $(document).ready(function() {
     $('#logo').show();
     $('#navbar').show();
     $('#welcome').show();
-    $('#wfooter').show();
+    $('#footer').show();
 
     $( "#button1" ).click(function() {
         $('#welcome').hide();

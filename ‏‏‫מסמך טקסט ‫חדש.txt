@@ -1,0 +1,77 @@
+
+//movedown
+  $( ".movedown" ).keypress(function(e) {
+    let key=String.fromCharCode(event.keyCode);
+    let upperCaseKey=(key.toUpperCase())
+   $(".movedown").val(upperCaseKey);
+    $(".movedown").css("width","25px")
+  });
+
+  $( ".movedown" ).keyup(function(e) {
+      var otherButtons=e.keyCode
+      var keyPressed=checkType(otherButtons)
+      if(keyPressed!=="")
+      {
+        $(".movedown").val(keyPressed);
+        $(".movedown").css("width","55%")
+      }
+  });
+
+//move left
+  $( ".moveright" ).keypress(function(e) {
+    let key=String.fromCharCode(event.keyCode);
+    let upperCaseKey=(key.toUpperCase())
+   $(".moveright").val(upperCaseKey);
+    $(".moveright").css("width","25px")
+  });
+
+  $( ".moveright" ).keyup(function(e) {
+      var otherButtons=e.keyCode
+      var keyPressed=checkType(otherButtons)
+      if(keyPressed!=="")
+      {
+        $(".moveright").val(keyPressed);
+        $(".moveright").css("width","55%")
+      }
+  });
+
+
+  //move right
+  $( ".moveleft" ).keypress(function(e) {
+    let key=String.fromCharCode(event.keyCode);
+    let upperCaseKey=(key.toUpperCase())
+   $(".moveleft").val(upperCaseKey);
+    $(".moveleft").css("width","25px")
+  });
+
+  $( ".moveleft" ).keyup(function(e) {
+      var otherButtons=e.keyCode
+      var keyPressed=checkType(otherButtons)
+      if(keyPressed!=="")
+      {
+        $(".moveleft").val(keyPressed);
+        $(".moveleft").css("width","55%")
+      }
+  });
+
+
+
+
+
+
+  checkType = otherButtons =>{
+    switch(otherButtons)
+        {
+            case(38):
+           return "ARROW UP";
+            case(40):
+            return "ARROW DOWN";
+            case(37):
+            return "ARROW LEFT";
+            case(39):
+            return "ARROW RIGHT";
+            default:
+            return "";
+        }
+  };
+});

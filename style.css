@@ -24,8 +24,8 @@ body{
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 95vh;
-    width: 70%;
+    height: 100%;
+    width: 75%;
     margin: 0 auto;
     margin-bottom: 0px;
     border:black solid;
@@ -89,6 +89,7 @@ body{
     width:100px;
     height: 100px;
     margin:10px;
+    position: relative;
 }
 
 /* General button style */
@@ -157,10 +158,11 @@ label{
       left:0;
     }
   
-    input[type='text'],
-    input[type='email'],
-    input[type='password'],
-    input[type='date']{
+    input[name='name'],
+    input[name='username'],
+    input[name='email'],
+    input[name='password'],
+    input[name='date']{
       text-align: center;
       display: block;
       width: 50%;
@@ -191,7 +193,7 @@ label{
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-        width: 70%;
+        width: 75%;
         margin: 0 auto;
         margin-bottom: 0px;
         border:black solid;
@@ -203,9 +205,12 @@ label{
 
     .desfooter{
         text-align: center;
-        margin:0 auto;
         border-top:none;
         border-radius: 25px;
+        color:rgb(224, 222, 222);
+        font-weight: bold;
+        margin:0 auto;
+        margin-top:-10vh;
     }
 
     .items{
@@ -269,3 +274,131 @@ label{
     font-size: 20px;
     font-weight: bold;
     }
+
+    .column{
+
+      float: left;
+  width: 50%;
+    }
+.column i{
+    width:  30px;
+    cursor: pointer;
+    height: 30px;
+    padding-top: 5px;
+    margin: 0 2px;
+    font-size:30px;
+    margin-left: 5px;
+    color:white;
+    
+}
+.column p{
+    font-family: 'bubble';
+    font-size: 28px;
+    color:#fff;
+    text-decoration: underline;
+    margin:0 auto;
+    border:1px black;
+}
+#textset{
+    width: 80%;
+    padding: 0.4rem;
+    font-size: 22px;
+    border:none;
+    background-color:transparent;
+    font-family: 'bubble';
+    color:white;
+    outline: none;
+    box-shadow:  1px 1px 5px rgba(0,0,0,0.5);
+}
+
+.form-group-settings{
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    width: 100%;
+    margin-left: 1rem;
+}
+
+input[type='number']{
+    width: 15%;
+    font-size: 22px;
+    border-radius: 25px;
+    text-align: center;
+    border:none;
+    background-color:transparent;
+    font-family: 'bubble';
+    color:white;
+    outline: none;
+    box-shadow:  1px 1px 5px rgba(0,0,0,0.5);
+}
+
+input[type="color"] {
+	-webkit-appearance: none;
+    border: 1px solid black;
+    border-radius: 15px;
+	width: 25px;
+	height: 25px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+
+.random{
+    display:inline-block;
+    height: 35px;
+    border-radius:0.15em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'bubble';
+    font-size:15px;
+    text-transform:uppercase;
+    font-weight:400;
+    color:#FFFFFF;
+    background-color:gray;
+    box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align:center;
+    position:relative;
+    cursor:pointer;
+        }
+    
+    .center{
+        margin-top:100px;
+        text-align: left;
+        margin:auto 0;
+
+    }
+
+    .header2{
+        font-family: 'bubble';
+        font-size: 28px;
+        color:#fff;
+        text-decoration:underline;
+        margin:auto 0;
+    }
+
+    .settingsbtn{
+margin-bottom: 7rem;
+text-decoration:none;
+margin-top:-30rem;
+font-family:'bubble';
+font-size:20px;
+text-transform:uppercase;
+font-weight:400;
+color:#FFFFFF;
+background-color:orange;
+box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+position:relative;
+cursor:pointer;
+height: 60px;
+width:120px;
+    }
+
+.form-setting{
+    align-items: left;
+    display: block;
+    text-align: left;
+    color: #888;
+    margin-top:-1.5vh
+}
