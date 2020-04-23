@@ -71,7 +71,8 @@ $('#formreg').submit(function(){
     $('#box').children().hide();
     $('#logo').show();
     $('#navbar').show();
-    $('#performence').show();
+    userName=userAuth['userName'];
+    $('#settings').show();
     }
     return false;
 });

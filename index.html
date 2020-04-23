@@ -3,12 +3,13 @@
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<!--all Pages js-->
-		<script type="text/javascript" src="./app.js"></script>
 		<script type="text/javascript" src="./Pages/Welcome/welcome.js"></script>
 		<script type="text/javascript" src="./Pages/Register/Register.js"></script>
-		<script type="text/javascript" src="./Components/Header/header.js"></script>
 		<script type="text/javascript" src="./Pages/Login/login.js"></script>
+		<script type="text/javascript" src="./Components/Header/header.js"></script>
 		<script type="text/javascript" src="./Pages/Performence/performence.js"></script>
+		<script type="text/javascript" src="./app.js"></script>
+	
 
 		<link rel="stylesheet" type="text/css" href="style.css"> 
 		<!--jquery validate import-->
@@ -189,33 +190,57 @@
 						</div>
 					<div class=form-group-settings>
 						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 5 Points balls:</span>
-						<input type="color" placeholder=" 0" id="5balls" name="balls" />
+						<input type="color"  onchange="test1(this)" placeholder=" 0" id="5balls" name="balls" />
 					</div>
 					<div class=form-group-settings>
 						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 15 Points balls:</span>
-						<input type="color" placeholder=" 0" id="15balls" name="balls" />
+						<input type="color"  onchange="test(this)"  placeholder=" 0" id="15balls" name="balls" />
 					</div>
 					<div class=form-group-settings>
 						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 25 Points balls:</span>
-						<input type="color" placeholder=" 0" id="25balls" name="balls" />
+						<input type="color"  onchange="test(this)" placeholder=" 0" id="25balls" name="balls" />
 					</div>
-					<input  style="text-align: right; top:-60px; display: inline-block; margin-left: 80%;"type="submit" class="btn1" value="start"></input>
+					<input  style="text-align: right; top:-60px; display: inline-block; margin-left: 80%;"type="submit" class="btn1"  value="start"></input>
 				</div>
 			</form>
 		  </div>
 		  
 			<!-- appGame div -->
+		<div class="game" id="startgame">
+		<div class="gameinputs">
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
+			<input class="inputgame" id="lblScore" type="text" />
 		</div>
-		<div id="time">
+		<div class="time" id="time">
 			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
+			<input class="inputgame" id="lblTime" type="text" />
 		</div>
+		</div>
+
 		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
+			<div class="items">
+				<p class="welcomemsg" id="or">welcome</p>
+				<p  style="font-family:Bubble; color:white; font-size:28px; margin-right: 5%;" >Lives:
+				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live1">
+				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live2">
+				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live3">
+				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live4">
+				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live5">
+				</p>
+			</div>
+			<canvas id="canvas" height="600px" width="1000px"></canvas>
+			<div class="inner"><button type="submit"  class="msgBtn" id="restart"  ><i class="fas fa-sync-alt"></i> Restart</button></div>
+			<div class="inner">
+				<a href="#ex2" rel="modal:open" class="msgBtn">Settings</a>
+				<div id="ex2" class="modal">
+					<p id="currentMsg">
+					</p>
+					<a href="#" style="margin-top: 5rem;"class="btn1" rel="modal:close">Close</a>
+				</div>
+			</div>
 		</div>
+	</div>
 	</div>
 
 

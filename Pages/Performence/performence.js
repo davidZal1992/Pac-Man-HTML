@@ -1,20 +1,14 @@
-var moveKeys={
-    up:'',
-    down:'',
-    left:'',
-    right:'',
+var moveKeys={};
+
+
+var setting={
+ballsMatch:'',
+monsters:'',
+smallColorBall:'',
+mediumColorBall:'',
+largeColorBall:'',
+time:''
 }
-
-
-var balls;
-var monsters;
-
-var smallColorBall;
-var mediumColorBall;
-var largeColorBall;
-
-var time;
-
 const up=38;
 const down=40;
 const left=37;
@@ -41,22 +35,22 @@ jQuery.validator.addMethod("timer", function(value, element) {
 jQuery.validator.addMethod("moveup", function(value, element) {
 
     return this.optional(element) || value.toString()!==$(".moveleft").val()&&value.toString()!==$(".moveright").val()&&value.toString()!==$(".movedown").val();
-},       "You cannot use the key for movment");
+},       "You cannot use the same key for movment");
 
 jQuery.validator.addMethod("movedown", function(value, element) {
 
     return this.optional(element) || value.toString()!==$(".moveleft").val()&&value.toString()!==$(".moveup").val()&&value.toString()!==$(".moveright").val();
-},       "You cannot use the key for movment");
+},       "You cannot use the same key for movment");
 
 jQuery.validator.addMethod("moveleft", function(value, element) {
 
     return this.optional(element) || value.toString()!==$(".moveright").val()&&value.toString()!==$(".moveup").val()&&value.toString()!==$(".movedown").val();
-},       "You cannot use the key for movment");
+},       "You cannot use the same key for movment");
 
 jQuery.validator.addMethod("moveright", function(value, element) {
 
     return this.optional(element) || value.toString()!==$(".moveleft").val()&&value.toString()!==$(".moveup").val()&&value.toString()!==$(".movedown").val();
-},       "You cannot use the key for movment");
+},       "You cannot use the same key for movment");
 
 
     $('#formsettings').validate({
@@ -103,94 +97,140 @@ $(document).ready(function(){
 
 //Movments events:
 //move up
-$( ".moveup" ).keypress(function(e) {
+$( ".moveup" ).keydown(function(e) {
+  var buttonPressed=e.keyCode
     e.preventDefault();
-    let key=String.fromCharCode(e.keyCode);
-    let upperCaseKey=(key.toUpperCase())
-   $(".moveup").val(upperCaseKey);
-    $(".moveup").css("width","25px")
-    moveKeys.moveup=$(".moveup").val();
-  });
-
-  $( ".moveup" ).keyup(function(e) {
-    e.preventDefault();
-
-      var otherButtons=e.keyCode
-      var keyPressed=checkType(otherButtons)
-      if(keyPressed!=="")
+    if(longButton(buttonPressed)!=="")
       {
-        moveKeys.moveup=$(".moveup").val();
-        $(".moveup").val(keyPressed);
-        $(".moveup").css("width","55%")
+        let newKey=longButton(buttonPressed);
+        moveKeys['up']=newKey.value;
+        $(".moveup").val(newKey.key);
+        $(".moveup").css("width","35%")
+        moveKeys['up']=e.keyCode;
+        return;
       }
-  });
+    if(shortButton(buttonPressed)!=="")
+      {
+        let newKey=shortButton(buttonPressed);
+        console.log(newKey)
+        moveKeys['up']=newKey.value;
+        $(".moveup").val(newKey.key);
+        $(".moveup").css("width","48px")
+        moveKeys['up']=e.keyCode;
+        return;
+      }
+
+      let key=String.fromCharCode(e.keyCode+32);
+      let upperCaseKey=(key.toUpperCase())
+      $(".moveup").val(upperCaseKey);
+      $(".moveup").css("width","25px")
+      moveKeys['up']=e.keyCode;
+      }
+  );
+
+ 
 //movedown
-  $( ".movedown" ).keypress(function(e) {
+$( ".movedown" ).keydown(function(e) {
+  var buttonPressed=e.keyCode
     e.preventDefault();
-    let key=String.fromCharCode(e.keyCode);
-    let upperCaseKey=(key.toUpperCase())
-   $(".movedown").val(upperCaseKey);
-    $(".movedown").css("width","25px")
-    moveKeys.movedown=$(".movedown").val();
-  });
-
-  $( ".movedown" ).keyup(function(e) {
-    e.preventDefault();
-      var otherButtons=e.keyCode
-      var keyPressed=checkType(otherButtons)
-      if(keyPressed!=="")
+    if(longButton(buttonPressed)!=="")
       {
-        $(".movedown").val(keyPressed);
-        $(".movedown").css("width","55%")
-        moveKeys.movedown=$(".movedown").val();
+        let newKey=longButton(buttonPressed);
+        moveKeys['down']=newKey.value;
+        $(".movedown").val(newKey.key);
+        $(".movedown").css("width","35%")
+        moveKeys['up']=e.keyCode;
+        return;
       }
-  });
+    if(shortButton(buttonPressed)!=="")
+      {
+        let newKey=shortButton(buttonPressed);
+        console.log(newKey)
+        moveKeys['down']=newKey.value;
+        $(".movedown").val(newKey.key);
+        $(".movedown").css("width","48px")
+        moveKeys['up']=e.keyCode;
+        return;
+      }
+
+      let key=String.fromCharCode(e.keyCode+32);
+      let upperCaseKey=(key.toUpperCase())
+      $(".movedown").val(upperCaseKey);
+      $(".movedown").css("width","25px")
+      moveKeys['down']=e.keyCode;
+      }
+  );
+
+//move right
+$( ".moveright" ).keydown(function(e) {
+  var buttonPressed=e.keyCode
+    e.preventDefault();
+    if(longButton(buttonPressed)!=="")
+      {
+        let newKey=longButton(buttonPressed);
+        moveKeys['right']=newKey.value;
+        $(".moveright").val(newKey.key);
+        $(".moveright").css("width","35%")
+        moveKeys['up']=e.keyCode;
+        return;
+      }
+    if(shortButton(buttonPressed)!=="")
+      {
+        let newKey=shortButton(buttonPressed);
+        console.log(newKey)
+        moveKeys['right']=newKey.value;
+        $(".moveright").val(newKey.key);
+        $(".moveright").css("width","48px")
+        moveKeys['up']=e.keyCode;
+        return;
+      }
+
+      let key=String.fromCharCode(e.keyCode+32);
+      let upperCaseKey=(key.toUpperCase())
+      $(".moveright").val(upperCaseKey);
+      $(".moveright").css("width","25px")
+      moveKeys['right']=e.keyCode;
+      }
+  );
+
+
 
 //move left
-  $( ".moveright" ).keypress(function(e) {
+$( ".moveleft" ).keydown(function(e) {
+  var buttonPressed=e.keyCode
     e.preventDefault();
-    let key=String.fromCharCode(e.keyCode);
-    let upperCaseKey=(key.toUpperCase())
-   $(".moveright").val(upperCaseKey);
-    $(".moveright").css("width","25px")
-    moveKeys.moveright=$(".moveright").val()
-  });
-
-  $( ".moveright" ).keyup(function(e) {
-    e.preventDefault();
-      var otherButtons=e.keyCode
-      var keyPressed=checkType(otherButtons)
-      if(keyPressed!=="")
+    if(longButton(buttonPressed)!=="")
       {
-        moveKeys.moveright=$(".moveright").val()
-        $(".moveright").val(keyPressed);
-        $(".moveright").css("width","55%")
+        let newKey=longButton(buttonPressed);
+        moveKeys['left']=newKey.value;
+        $(".moveleft").val(newKey.key);
+        $(".moveleft").css("width","35%")
+        moveKeys['up']=e.keyCode;
+        return;
       }
-  });
-
-
-  //move right
-  $( ".moveleft" ).keypress(function(e) {
-    e.preventDefault();
-    let key=String.fromCharCode(event.keyCode);
-    let upperCaseKey=(key.toUpperCase())
-    moveKeys.moveleft=$(".moveleft").val()
-   $(".moveleft").val(upperCaseKey);
-    $(".moveleft").css("width","25px")
-  });
-
-  $( ".moveleft" ).keyup(function(e) {
-    e.preventDefault();
-      var otherButtons=e.keyCode
-      var keyPressed=checkType(otherButtons)
-      if(keyPressed!=="")
+    if(shortButton(buttonPressed)!=="")
       {
-        moveKeys.moveleft=$(".moveleft").val()
-        $(".moveleft").val(keyPressed);
-        $(".moveleft").css("width","55%")
+        let newKey=shortButton(buttonPressed);
+        console.log(newKey)
+        moveKeys['left']=newKey.value;
+        $(".moveleft").val(newKey.key);
+        $(".moveleft").css("width","48px")
+        moveKeys['up']=e.keyCode;
+        return;
       }
-  });
 
+      let key=String.fromCharCode(e.keyCode+32);
+      let upperCaseKey=(key.toUpperCase())
+      $(".moveleft").val(upperCaseKey);
+      $(".moveleft").css("width","25px")
+      moveKeys['left']=e.keyCode;
+      }
+  );
+
+
+
+  
+  
 //Balls color change event
 
   $('#5balls').change(function(){
@@ -208,7 +248,7 @@ $( ".moveup" ).keypress(function(e) {
    //Ball size
 
    $('#ball').on('change keyup', function() {
-        this.balls=$(this).val();
+    ballsMatch=$(this).val();
 });
 
 
@@ -224,33 +264,151 @@ $( ".moveup" ).keypress(function(e) {
         this.time=$(this).val();
         }); 
 
-  checkType = otherButtons =>{
+  longButton = otherButtons =>{
+    console.log(otherButtons)
     switch(otherButtons)
         {
             case(38):
-           return "ARROW UP";
+           return {key:"ARROW UP",value:38};
             case(40):
-            return "ARROW DOWN";
+            return {key:"ARROW DOWN",value:40};
             case(37):
-            return "ARROW LEFT";
+            return {key:"ARROW LEFT",value:37};
             case(39):
-            return "ARROW RIGHT";
-            case(36):
-            return "NUMPAD 7";
-            case(33):
-            return "NUMPAD 9";
-            case(35):
-            return "NUMPAD 1";
+            return {key:"ARROW RIGHT",value:39};
+            case(103):
+            return {key:"NUMPAD 7",value:103};
+            case(105):
+            return {key:"NUMPAD 9", value:105};
+            case(97):
+            return {key:"NUMPAD 1", value:97};
+            case(99):
+            return {key:"NUMPAD 3", value:99};
+            case(101):
+            return {key:"NUMPAD 5", value:101};
+            case(8):
+            return {key:"BACKSPACE",value:8};
+            case(104):
+            return {key:"NUMPAD 8",value:104};
+            case(98):
+            return {key:"NUMPAD 2",value:98};
+            case(100):
+            return {key:"NUMPAD 4",value:100};
+            case(102):
+            return {key:"NUMPAD 6",value:102};
             case(34):
-            return "NUMPAD 3";
-            case(12):
-            return "NUMPAD 5";
+            return {key:"PAGE DOWN", value:34};
+            case(33):
+            return {key:"PAGE UP", value:33};
+            case(45):
+            return {key:"INSERT",value:45};
+            case(36):
+            return {key:"HOME", value:36};
+            case(35):
+            return {key:"END", value:35};
+            case(46):
+            return {key:"DELETE", value:12};
+            case(144):
+            return {key:"Num Lock",value:144};
+            case(20):
+            return {key:"Caps Lock",value:20};
+            case(16):
+            return {key:"SHIFT",value:16};
+            case(17):
+            return {key:"CTRL",value:17};
+            case(32):
+            return {key:"SPACE",value:32};
+            case(13):
+            return {key:"ENTER",value:13};
             default:
             return "";
         }
   };
+
+  shortButton = shortButtons =>{
+    switch(shortButtons){
+
+          case(192):
+           return {key:"`",value:192};
+            case(189):
+            return {key:"-",value:189};
+            case(187):
+            return {key:"=",value:187};
+            case(111):
+            return {key:"/",value:111};
+            case(106):
+            return {key:"*",value:106};
+            case(9):
+            return {key:"TAB",value:9};
+            case(18):
+            return {key:"ALT",value:18};
+            case(191):
+            return {key:"/",value:191};
+            case(190):
+            return {key:".",value:190};
+            case(188):
+            return {key:",",value:188};
+            case(186):
+            return {key:";",value:186};
+            case(222):
+            return {key:"'",value:222};
+            case(220):
+            return {key:'\\',value:220};
+            case(219):
+            return {key:'[',value:219};
+            case(221):
+            return {key:"]",value:221};
+            case(112):
+            return {key:'F1',value:112};
+            case(113):
+            return {key:'F2',value:113};
+            case(114):
+            return {key:'F3',value:114};
+            case(115):
+            return {key:'F4',value:115};
+            case(116):
+            return {key:'F5',value:116};
+            case(117):
+            return {key:'F6',value:117};
+            case(118):
+            return {key:'F7',value:118};
+            case(119):
+            return {key:'F8',value:119};
+            case(120):
+            return {key:'F9',value:120};
+            case(121):
+            return {key:'F10',value:121};
+            case(122):
+            return {key:'F11',value:122};
+            case(123):
+            return {key:'F12',value:123};
+            case(49):
+            return {key:'1',value:49};
+            case(50):
+            return {key:'2',value:50};
+            case(51):
+            return {key:'3',value:51};
+            case(52):
+            return {key:'4',value:52};
+            case(53):
+            return {key:'5',value:53};
+            case(54):
+            return {key:'6',value:54};
+            case(55):
+            return {key:'7',value:55};
+            case(56):
+            return {key:'8',value:56};
+            case(57):
+            return {key:'9',value:57};
+            case(48):
+            return {key:'0',value:48};
+
+            default:
+            return "";
+
+    }
+  }
 $(".random").click(function(e) {
-    console.log('asdsad')
     setMove();
     ballNumbers();
     chooseColor();
@@ -267,20 +425,20 @@ setMove = () =>{
     $(".moveleft").val("ARROW LEFT");
     $(".moveleft").css("width","55%")
     $(".moveright").val("ARROW RIGHT");
-    $(".movelright").css("width","55%")
-    moveKeys.moveup=$(".moveup").val()
-    moveKeys.movedown=$(".movedown").val()
-    moveKeys.moveright=$(".moveright").val()
-    moveKeys.moveleft=$(".moveleft").val()
+    $(".moveright").css("width","55%")
+    moveKeys['up']=38;
+    moveKeys['down']=40;
+    moveKeys['right']=39;
+    moveKeys['left']=37;
 }
 
 ballNumbers = () =>{
-    var balls=Math.floor(Math.random() * 31) + 50;
-    var monsters=Math.floor(Math.random() * 4) + 1;
+    let balls=Math.floor(Math.random() * 31) + 50;
+    let monster=Math.floor(Math.random() * 4) + 1;
     $('#ball').val(balls);
-    this.balls=balls;
-    $('#monster').val(monsters); 
-    this.monsters=monsters;
+    ballsMatch=balls;
+    $('#monster').val(monster); 
+    monsters=monster;
 }
 chooseColor =()=>{
     //5Balls
@@ -297,4 +455,28 @@ setTimer =()=>{
     $('#timer').val(time);
     timer=time;
 }
+
+$('#formsettings').submit(function(){
+  if ($(this).valid() !== true) {
+  }
+  else{
+  $('#box').children().hide();
+  $('#logo').show();
+   $('#navbar').show();
+   $('#or').text("Welcome " +userName +"!")
+   $('<p id="currentMsg"> <span style="text-decoration:underline; color:gray;">Keys:</span><br> Move up:' +$(".moveup").val() + '<br> Move down:' +$(".movedown").val() +'<br>Move left:' + $(".moveleft").val()+
+   '<br> Move right: ' +$(".moveright").val() + '<br><br>  <span style="text-decoration:underline; color:gray;">Time:</span> <br>Time per game: '+ timer +  '<br><br><span style="text-decoration:underline; color:gray;">Structre:</span><br>'+' Number of food balls :' +ballsMatch +
+   '<br>    Number of monsters: '+monsters+
+   '<br> Color of 5 points balls: <span><i style="color:'+smallColorBall+';"class="fas fa-circle"></i></i><span>'+
+   '<br> Color of 15 points balls:<span><i style="color:'+mediumColorBall+';"class="fas fa-circle"></i></i><span>'+
+   '<br>  Color of 25 points balls: <span><i style="color:'+largeColorBall+';"class="fas fa-circle"></i></i><span>'+
+   '</p>').appendTo('#currentMsg')
+   $('#startgame').show();
+   Start();
+  }
+  return false;
+})
+
+
+
 });

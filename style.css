@@ -252,7 +252,6 @@ label{
     .modal{
         font-family: 'Noto Sans JP', sans-serif;
         font-size: 24px;
-        background-color: blueviolet;
     }
 
     @-webkit-keyframes autofill {
@@ -269,6 +268,8 @@ label{
     }
 
     .loginError{
+        margin-top: -50px;
+        text-align: center;
         color: red;
         font-family: 'Noto Sans JP', sans-serif;
     font-size: 20px;
@@ -401,4 +402,52 @@ width:120px;
     text-align: left;
     color: #888;
     margin-top:-1.5vh
+
+}
+
+.gameinputs{
+    text-align: center;
+    overflow: hidden;
+}
+
+#canvas {
+    border-radius: 15px;
+    background-color: rgba(0,0,0,0.3);
+    overflow: hidden;
+    position: relative;
+    width: 90%;
+    height: 100%;
+}
+
+.inputgame{
+    width: 10%;
+    font-size: 22px;
+    font-family: 'Bubble';
+    color:black;
+    border:none;
+    background-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.lives{
+        width:30x;
+        height: 30px;
+        margin:1px;
+}
+
+.divliv{
+    display: inline-block;
+    font-size:25px;
+    color:white;
+    font-family: 'bubble';
+    margin-top:-1rem;
+    margin-right: 60%;
+}
+
+.welcomemsg{
+    font-family: 'Bubble';
+    font-size: 28px;
+    color:white;
+    text-align: left;
+    margin-left:5%
 }

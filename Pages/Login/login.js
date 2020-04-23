@@ -36,6 +36,8 @@ $(document).ready(function(e){
                     $('#box').children().hide();
                     $('#logo').show();
                      $('#navbar').show();
+                     console.log(userName);
+                     $('#or').text("Welcome " +userName +"!")
                      $('#settings').show();
                      return false;
                   }   
@@ -45,7 +47,7 @@ $(document).ready(function(e){
        }   
        else{
                 //TODO:user doenst exists
-                $('#errormsg').text("The user dosn't exists, go and register")
+                $('#errormsg').text("The user dosn't exists, you must be registered")
        }
         }
         return false;

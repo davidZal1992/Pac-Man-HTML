@@ -6,21 +6,35 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var last;
+var livesCounter;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
-	Start();
+
+	$('#restart').click(function(){
+		Start();
+	})
+	//Prevent scrolling
+
 });
 
 function Start() {
+	livesCounter=5;
+	window.addEventListener("keydown", function(e) {
+		if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+			e.preventDefault();
+		}
+	}, false);
+	console.log(moveKeys)
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
-	var cnt = 100;
-	var food_remain = 50;
+	var cnt = 150;
+	var food_remain = ballsMatch;
 	var pacman_remain = 1;
 	start_time = new Date();
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < 17; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) {
@@ -45,6 +59,7 @@ function Start() {
 				} else {
 					board[i][j] = 0;
 				}
+				console.log(i);
 				cnt--;
 			}
 		}
@@ -59,6 +74,7 @@ function Start() {
 		"keydown",
 		function(e) {
 			keysDown[e.keyCode] = true;
+			console.log(keysDown);
 		},
 		false
 	);
@@ -73,39 +89,40 @@ function Start() {
 }
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() * 9 + 1);
+	var i = Math.floor(Math.random() * 14 + 1);
 	var j = Math.floor(Math.random() * 9 + 1);
 	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * 9 + 1);
+		i = Math.floor(Math.random() * 14 + 1);
 		j = Math.floor(Math.random() * 9 + 1);
 	}
 	return [i, j];
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[moveKeys.up]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[moveKeys.down]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[moveKeys.left]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[moveKeys.right]) {
 		return 4;
 	}
 }
 
-function Draw() {
+function Draw(x) {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
-	for (var i = 0; i < 10; i++) {
+	for (var i = 0; i < 30; i++) {
 		for (var j = 0; j < 10; j++) {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
+			
 			if (board[i][j] == 2) {
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
@@ -116,6 +133,7 @@ function Draw() {
 				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
+			
 			} else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
@@ -150,7 +168,7 @@ function UpdatePosition() {
 		}
 	}
 	if (x == 4) {
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+		if (shape.i < 30 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
 	}
@@ -162,6 +180,17 @@ function UpdatePosition() {
 	time_elapsed = (currentTime - start_time) / 1000;
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
+	}
+	if("")
+	{
+		//TODO: IF YOU EAT BY MONSTER
+		$("#live" +livesCounter).remove();
+		livesCounter--;
+	}
+
+	if(livesCounter==0)
+	{
+		//TODO: GAME OVER
 	}
 	if (score == 50) {
 		window.clearInterval(interval);
