@@ -37,7 +37,6 @@ $(document).ready(function(e){
                     $('#logo').show();
                      $('#navbar').show();
                      console.log(userName);
-                     $('#or').text("Welcome " +userName +"!")
                      $('#settings').show();
                      return false;
                   }   

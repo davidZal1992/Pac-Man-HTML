@@ -1,14 +1,13 @@
 var moveKeys={};
 
 
-var setting={
-ballsMatch:'',
-monsters:'',
-smallColorBall:'',
-mediumColorBall:'',
-largeColorBall:'',
-time:''
-}
+
+var ballsMatch
+var monsters
+var smallColorBall
+var mediumColorBall
+var largeColorBall
+var time
 const up=38;
 const down=40;
 const left=37;

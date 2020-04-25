@@ -8,6 +8,7 @@ var time_elapsed;
 var interval;
 var last;
 var livesCounter;
+var last='./assets/img/pacright.png';
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -21,6 +22,7 @@ $(document).ready(function() {
 
 function Start() {
 	livesCounter=5;
+
 	window.addEventListener("keydown", function(e) {
 		if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
 			e.preventDefault();
@@ -34,7 +36,7 @@ function Start() {
 	var food_remain = ballsMatch;
 	var pacman_remain = 1;
 	start_time = new Date();
-	for (var i = 0; i < 17; i++) {
+	for (var i = 0; i < 16; i++) {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 10; j++) {
@@ -43,7 +45,52 @@ function Start() {
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
 				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
+				(i == 6 && j == 2)||
+				(i == 7 && j == 2)||
+				(i == 8 && j == 2)||
+				(i == 9 && j == 2)||
+
+				(i == 9 && j == 3)||
+				(i == 9 && j == 4)||
+				(i == 9 && j == 5)||
+				(i == 9 && j == 6)||
+
+				(i == 14 && j ==9)||
+				(i == 13 && j ==9)||
+				(i == 12 && j ==9)||
+				(i == 11 && j ==9)||
+
+				(i == 14 && j ==8)||
+				(i == 14 && j ==7)||
+				(i == 14 && j ==6)||
+				(i == 14 && j ==5)||
+				(i == 15 && j ==5)||
+
+				(i == 15 && j ==1)||
+				(i == 14 && j ==1)||
+				(i == 13 && j ==1)||
+				(i == 12 && j ==1)||
+
+				(i == 1 && j ==9)||
+				(i == 2 && j ==9)||
+				(i == 3 && j ==9)||
+				(i == 4 && j ==9)||
+				(i == 1 && j ==8)||
+
+				(i == 5 && j ==5)||
+				(i == 6 && j ==5)||
+				(i == 7 && j ==5)||
+				(i == 1 && j ==0)||
+				(i == 0 && j ==0)||
+				(i == 0 && j ==1)||
+				(i == 0 && j ==2)||
+
+				(i == 12 && j ==2)||
+				(i == 12 && j ==3)||
+				(i == 12 && j ==4)||
+				(i == 12 && j ==5)
+
+
 			) {
 				board[i][j] = 4;
 			} else {
@@ -89,10 +136,10 @@ function Start() {
 }
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() * 14 + 1);
+	var i = Math.floor(Math.random() * 15 + 1);
 	var j = Math.floor(Math.random() * 9 + 1);
 	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * 14 + 1);
+		i = Math.floor(Math.random() * 15 + 1);
 		j = Math.floor(Math.random() * 9 + 1);
 	}
 	return [i, j];
@@ -124,16 +171,22 @@ function Draw(x) {
 			center.y = j * 60 + 30;
 			
 			if (board[i][j] == 2) {
-				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-				context.lineTo(center.x, center.y);
-				context.fillStyle = pac_color; //color
-				context.fill();
-				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
-				context.fill();
-			
+				if(x==1){
+				make_base(center.x,center.y,'./assets/img/pacup.png')
+				}
+				else if(x==2){
+				make_base(center.x,center.y,'./assets/img/pacdown.png')
+				}
+				else if(x==3){
+				make_base(center.x,center.y,'./assets/img/pacleft.png')
+				}
+				else if(x==4){
+				make_base(center.x,center.y,'./assets/img/pacright.png')
+				}
+				else
+				make_base(center.x,center.y,last)
+
+	
 			} else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
@@ -141,9 +194,10 @@ function Draw(x) {
 				context.fill();
 			} else if (board[i][j] == 4) {
 				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
-				context.fillStyle = "grey"; //color
+				context.strokeStyle = "#fff";
+				context.strokeRect(center.x - 30, center.y - 30, 60, 60);
 				context.fill();
+			
 			}
 		}
 	}
@@ -196,6 +250,15 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
-		Draw();
+		Draw(GetKeyPressed());
 	}
+}
+
+function make_base(centerx,centery,url){
+base_image = new Image();
+base_image.src = url;
+base_image.onload = function(){
+context.drawImage(base_image, centerx-30, centery-30,60,60);
+last=url
+}
 }
