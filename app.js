@@ -476,12 +476,7 @@ function UpdatePosition() {
 	{
 		gameTimeOver()
 	}
-	if (score == 500) {
-		window.clearInterval(interval);
-		window.alert("Game completed");
-	} else {
-		Draw(GetKeyPressed());
-	}
+	Draw(GetKeyPressed());
 	if(endGame==true)
 	{
 		$("#song").get(0).pause();
