@@ -12,6 +12,7 @@
 	
 
 		<link rel="stylesheet" type="text/css" href="style.css"> 
+		<link rel="stylesheet" type="text/css" href="teststyle.css"> 
 		<!--jquery validate import-->
 		<script src="https://kit.fontawesome.com/331eb2463a.js" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -217,20 +218,32 @@
 			<input class="inputgame" id="lblTime" type="text" />
 		</div>
 		</div>
-
+		<audio loop id="song">
+			<source src="./assets/sound/pacsong.mp3"  type="audio/mp3">
+			Your browser does not support the audio tag.
+		</audio>
+		<audio  id="errorsong">
+			<source src="./assets/sound/error.mp3" type="audio/mp3">
+			Your browser does not support the audio tag.
+		</audio>
 		<div id="game">
 			<div class="items">
-				<p class="welcomemsg" id="or">welcome</p>
-				<p  style="font-family:Bubble; color:white; font-size:28px; margin-right: 5%;" >Lives:
+				<p  style="font-family:Bubble; color:white; font-size:28px; margin-left: 5%;" >Lives:
 				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live1">
 				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live2">
 				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live3">
 				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live4">
-				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live5">
 				</p>
+				<p class="welcomemsg" id="or">welcome</p>
 			</div>
-			<canvas id="canvas" height="600px" width="1000px" style="border:1px solid #fff;"></canvas>
-			<div class="inner"><button type="submit"  class="msgBtn" id="loginPage"  ><i class="fas fa-sync-alt"></i> Restart</button></div>
+			<canvas id="canvas" height="600px" width="1000px" style="border:1px solid #fff;">
+			<img src="./assets/img/pacright.png" id="right">
+			<img src="./assets/img/pacup.png" id="up">
+			<img src="./assets/img/pacdown.png" id="down">
+			<img src="./assets/img/pacleft.png" id="left">
+			<img src="./assets/img/mmonster.png" id="monsterpic">
+			</canvas>
+			<div class="inner"><button type="submit"  class="msgBtn" id="restart"  ><i class="fas fa-sync-alt"></i> Restart</button></div>
 			<div class="inner">
 				<a href="#ex2" rel="modal:open" class="msgBtn">Settings</a>
 				<div id="ex2" class="modal">
@@ -241,6 +254,21 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="GameOvermodal">
+		<div class="modal-content">
+			<div>
+			<video id="video1" style="border-radius: 35px;" width="400" >
+				<source style="border-radius: 35px;" src="./assets/video/coffindance.mp4" mute="muted" type="video/mp4">
+				Your browser does not support HTML5 video.
+			</div>
+			<div>
+			<p id="endPar"></p>
+			<button id="restartLose" style="margin-top: -3rem;" class="msgBtn"> Restart</button>
+			</div>
+		 </div>
+	</div>
+
 	</div>
 
 

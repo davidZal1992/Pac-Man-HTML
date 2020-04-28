@@ -435,30 +435,37 @@ ballNumbers = () =>{
     let balls=Math.floor(Math.random() * 31) + 50;
     let monster=Math.floor(Math.random() * 4) + 1;
     $('#ball').val(balls);
-    ballsMatch=balls;
     $('#monster').val(monster); 
-    monsters=monster;
+  
 }
 chooseColor =()=>{
     //5Balls
     $('#5balls').val("#"+((1<<24)*Math.random()|0).toString(16));
     $('#15balls').val("#"+((1<<24)*Math.random()|0).toString(16));
     $('#25balls').val("#"+((1<<24)*Math.random()|0).toString(16));
-    smallColorBall= $('#5balls').val();
-    mediumColorBall= $('#15balls').val();
-    largeColorBall= $('#25balls').val();
 }
 
 setTimer =()=>{
     var time= Math.floor(Math.random() * 1000) + 60
     $('#timer').val(time);
-    timer=time;
 }
 
-$('#formsettings').submit(function(){
+$('#formsettings').submit(function(e){
+  e.preventDefault();
   if ($(this).valid() !== true) {
   }
   else{
+
+    smallColorBall= $('#5balls').val();
+    mediumColorBall= $('#15balls').val();
+    largeColorBall= $('#25balls').val();
+
+  
+    ballsMatch=$('#ball').val();
+    monsters=$('#monster').val(); 
+
+    timer=$('#timer').val();
+    
   $('#box').children().hide();
   $('#logo').show();
    $('#navbar').show();
@@ -471,6 +478,9 @@ $('#formsettings').submit(function(){
    '<br>  Color of 25 points balls: <span><i style="color:'+largeColorBall+';"class="fas fa-circle"></i></i><span>'+
    '</p>').appendTo('#currentMsg')
    $('#startgame').show();
+   $("#song").get(0).play();
+   $('#video1')[0].play();
+   $("#video1").get(0).pause();
    Start();
   }
   return false;
