@@ -26,6 +26,8 @@ var smallPointsBall;
 var mediumPointsBall;
 var largePointsBall;
 var watchBack;
+var livesBack;
+var skeltonBack;
 
 //end game
 var endGame=false;
@@ -182,8 +184,14 @@ function Start() {
 		pacman_remain--;
 		board[shape.i][shape.j] = 2;
 		
-		var emptyCell = findRandomEmptyCell(board);
+		 emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]]=12;
+
+		 emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]]=13;
+
+		emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]]=14;
 
 	keysDown = {};
 	addEventListener(
@@ -206,12 +214,6 @@ function Start() {
 
 	createMonsters(monsters)
 	interval=setInterval(UpdatePosition ,250);
-	
-	//UpdatePosition()
-
-	//interval = setInterval(updatePosition2, 350);
-	//intervalMonsters = setInterval(updatePosition2,2000)
-	//updatePosition2()
 }
 
 function findRandomEmptyCell(board) {
@@ -321,7 +323,17 @@ function Draw(x) {
 			else if (board[i][j]=== 12)
 			{
 				var timerImage = document.getElementById('watch');
-				context.drawImage(timerImage, center.x -30, center.y-30,40,40);
+				context.drawImage(timerImage, center.x -20, center.y-20,40,40);
+			}
+			else if (board[i][j]=== 13)
+			{
+				var timerImage = document.getElementById('newLive');
+				context.drawImage(timerImage, center.x -20, center.y-20,40,40);
+			}
+			else if (board[i][j]=== 14)
+			{
+				var timerImage = document.getElementById('skeleton');
+				context.drawImage(timerImage, center.x-20 , center.y-20,40,40);
 			}
 			if(board[i][j]==11)
 			{
@@ -367,6 +379,12 @@ function updatePosition2()
 	}
 	else if(board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]==12){
 		monsterShapes[i].watchBack=true;
+	}
+	else if(board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]==13){
+		monsterShapes[i].livesBack=true;
+	}
+	else if(board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]==14){
+		monsterShapes[i].skeltonBack=true;
 	}
 
 	if(board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]==2)
@@ -429,7 +447,7 @@ function UpdatePosition() {
 			shape.i++;
 		}
 	}
-
+	//monster meeting
 	if(board[shape.i][shape.j]==11)
 	{
 		if(livesCounter==0)
@@ -452,6 +470,8 @@ function UpdatePosition() {
 	}
 	}
 
+
+
 	//score calculate
 	if (board[shape.i][shape.j] == 7) {
 		score=score+5;	
@@ -465,6 +485,23 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 12) {
 		downTime=30;
 	}
+
+	//live decrease/increase
+	if (board[shape.i][shape.j] == 13&&livesCounter!=4) {
+			livesCounter++;
+			$("#live"+livesCounter).show();
+	}
+	if (board[shape.i][shape.j] == 14) {
+		if(livesCounter!=0)
+		{
+			$("#live"+livesCounter).hide();
+			livesCounter--;
+		}
+		else{
+			gameOver();
+		}
+	
+}
 
 
 	
@@ -565,6 +602,8 @@ createMonsters =(monsters) =>{
 			monsterDetails.mediumBack=false;
 			monsterDetails.largeBack=false;
 			monsterDetails.watchBack=false;
+			monsterDetails.livesBack=false;
+			monsterDetails.skeltonBack=false;
 			if(board[i][0]==7){
 				monsterDetails.smallBack=true;
 				}
@@ -576,6 +615,12 @@ createMonsters =(monsters) =>{
 				}
 				else if(board[i][0]==12){
 				monsterDetails.watchBack=true;
+				}
+				else if(board[i][0]==13){
+				monsterDetails.livesBack=true;
+				}
+				else if(board[i][0]==14){
+				monsterDetails.skeltonBack=true;
 				}
 			
 			board[i][0]=11
@@ -591,7 +636,7 @@ createMonsters =(monsters) =>{
 gameOver = () =>{
 	endGame=true;
 	$("#song").get(0).pause();
-	$('<p style="font-family:bubble; font-size:28px; color:black;">Score: <span style="color:blue">'+score+'</span><br>You Loser!!!</p>').appendTo("#endPar")
+	$('<p style="font-family:Bowlby One SC, cursive;  font-size:28px; color:black;">Score: <span style="color:blue">'+score+'</span><br>You Loser!!!</p>').appendTo("#endPar")
 	clearInterval(interval);
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
@@ -606,7 +651,7 @@ gameTimeOver = () =>{
 	$("#song").get(0).pause();
 	clearInterval(interval);
 	if(score<100){
-	$('<p style="font-family:bubble; font-size:28px; color:black;">Score: <span style="color:blue">You are better than '+score+' points! </span></p>').appendTo("#endPar")
+	$('<p style="font-family:Bowlby One SC, cursive;  font-size:28px; color:black;">Score: <span style="color:blue">You are better than '+score+' points! </span></p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
@@ -614,7 +659,7 @@ gameTimeOver = () =>{
 	$('#video1')[0].play();
 	}
 	else{
-	$('<p style="font-family:bubble; font-size:28px; color:black;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
+	$('<p style=font-family:Bowlby One SC, cursive;  font-size:28px; color:black;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
@@ -629,7 +674,7 @@ gameWinner = () =>{
 	endGame=true;
 	$("#song").get(0).pause();
 	clearInterval(interval);
-	$('<p style="font-family:bubble; font-size:28px; color:black;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
+	$('<p style="font-family:Bowlby One SC, cursive; font-size:28px; color:black;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
@@ -655,6 +700,16 @@ drawBack = (monsterDetail) =>{
 	{
 		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=12;
 		monsterDetail.watchBack=false;
+	}
+	else if(monsterDetail.livesBack)
+	{
+		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=13;
+		monsterDetail.livesBack=false;
+	}
+	else if(monsterDetail.skeltonBack)
+	{
+		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=14;
+		monsterDetail.skeltonBack=false;
 	}
 	else
 	{

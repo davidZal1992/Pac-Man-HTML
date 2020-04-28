@@ -19,12 +19,11 @@ $(document).ready(function() {
       });
 });
 
- 
 var users=  JSON.parse(localStorage.getItem('users'));
 console.log(users)
 if(!users)
 {
-    users=[{'userName':'p','password':'p'}]
+    users=[{'userName':'p','password':'p'}] 
 }
 else{
     let found=users.find(user => user.userName==='p')

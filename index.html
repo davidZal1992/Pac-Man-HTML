@@ -21,6 +21,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 		<!-- fonts styles-->
+		<link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 		<link href="./assets/fonts/PAC-FONT.TTF" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
@@ -243,6 +244,8 @@
 			<img src="./assets/img/pacleft.png" id="left">
 			<img src="./assets/img/mmonster.png" id="monsterpic">
 			<img src="./assets/img/watch.png" id="watch">
+			<img src="./assets/img/logopac.png" id="newLive">
+			<img src="./assets/img/skeleton.png" id="skeleton">
 			</canvas>
 			<div class="inner"><button type="submit"  class="msgBtn" id="restart"  ><i class="fas fa-sync-alt"></i> Restart</button></div>
 			<div class="inner">
@@ -259,18 +262,18 @@
 	<div class="GameOvermodal">
 		<div class="modal-content">
 			<div id="loser">
-			<video id="video1" style="border-radius: 35px;" width="400" >
+			<video id="video1"style="border-radius: 35px; border:2px solid black" width="400" >
 				<source style="border-radius: 35px;" src="./assets/video/coffindance.mp4" mute="muted" type="video/mp4">
 				Your browser does not support HTML5 video.
 			</div>
 			<div id="winner">
-			<video id="video2" style="border-radius: 35px;" width="400" >
+			<video id="video2" style="border-radius: 35px; border:2px solid black" width="400" >
 				<source style="border-radius: 35px;" src="./assets/video/winner.mp4" mute="muted" type="video/mp4">
 				Your browser does not support HTML5 video.
 			</div>
 			<div>
-			<p id="endPar"></p>
-			<button id="restartLose" style="margin-top: -3rem;" class="msgBtn"> Restart</button>
+			<p id="endPar" ></p>
+			<button id="restartLose"  style="background-color: orange;" class="msgBtn"> Restart</button>
 			</div>
 		 </div>
 	</div>
