@@ -1,5 +1,8 @@
 $(document).ready(function() {
 $( "#homePage" ).click(function() {
+  clearInterval(interval)
+  $("#song").get(0).pause();
+  $('#startgame').hide();
     $('#box').children().hide();
     $('#logo').show();
     $('#navbar').show();
@@ -7,6 +10,9 @@ $( "#homePage" ).click(function() {
   })
 
   $( "#registerPage" ).click(function() {
+    $('#startgame').hide();
+    clearInterval(interval)
+    $("#song").get(0).pause();
     $('#box').children().hide();
     $('#logo').show();
     $('#navbar').show();
@@ -14,6 +20,9 @@ $( "#homePage" ).click(function() {
   })
 
   $( "#loginPage" ).click(function() {
+    $('#startgame').hide();
+    clearInterval(interval)
+    $("#song").get(0).pause();
     $('#box').children().hide();
     $('#logo').show();
     $('#navbar').show();

@@ -448,7 +448,7 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if(time_elapsed==timer)
+	if(time_elapsed-timer>0)
 	{
 		gameTimeOver()
 	}
@@ -569,6 +569,7 @@ gameOver = () =>{
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
+	$('#winner').hide();
 	$('#video1')[0].play();
 
 }
@@ -576,12 +577,23 @@ gameOver = () =>{
 gameTimeOver = () =>{
 	endGame=true;
 	$("#song").get(0).pause();
-	$('<p style="font-family:bubble; font-size:28px; color:black;">Score: <span style="color:blue">You are better than '+score+' points! </span></p>').appendTo("#endPar")
 	clearInterval(interval);
+	if(score<100){
+	$('<p style="font-family:bubble; font-size:28px; color:black;">Score: <span style="color:blue">You are better than '+score+' points! </span></p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
+	$('#winner').hide();
 	$('#video1')[0].play();
+	}
+	else{
+	$('<p style="font-family:bubble; font-size:28px; color:black;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
+	var modal = document.querySelector(".GameOvermodal");
+	$('.GameOvermodal').show();
+	modal.classList.toggle("show-modal");
+	$('#loser').hide();
+	$('#video2')[0].play();
+	}
 
 }
 
