@@ -1,21 +1,35 @@
 var context;
+
+//pac shape
 var shape = new Object();
+
+//monsters
 var monsterShapes=[];
+
+//main board
 var board;
+
+//items in gameplay(e.g times, starttime, score..)
 var score;
-var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
-var interval2;
-var last;
+
+//lives
 var livesCounter=4;
+
+//lastPosition
 var last='right';
+
+//remember value in cells before update new position of monster
 var smallPointsBall;
 var mediumPointsBall;
 var largePointsBall;
-var endGame=false;
+var watchBack;
 
+//end game
+var endGame=false;
+var downTime=0;
 
 
 $(document).ready(function() {
@@ -52,7 +66,6 @@ function Start() {
 	}, false);
 	board = new Array();
 	score = 0;
-	pac_color = "yellow";
 	var cnt = 150;
 	var food_remain_small = ballsMatch*0.6;
 	var food_remain_medium = ballsMatch*0.3;
@@ -145,6 +158,7 @@ function Start() {
 		}
 		
 	}
+
 	while (food_remain_small > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 7;
@@ -162,13 +176,15 @@ function Start() {
 		board[emptyCell[0]][emptyCell[1]] = 9;
 		food_remain_large--;
 	}
-
 		var emptyCell = findRandomEmptyCell(board);
 		shape.i = emptyCell[0];
 		shape.j =emptyCell[1];
 		pacman_remain--;
 		board[shape.i][shape.j] = 2;
 		
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]]=12;
+
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -186,6 +202,7 @@ function Start() {
 		},
 		false
 	);
+
 
 	createMonsters(monsters)
 	interval=setInterval(UpdatePosition ,250);
@@ -225,11 +242,9 @@ function GetKeyPressed() {
 function Draw(x) {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = timer-time_elapsed;
-	console.log(lblTime.value)
+	lblTime.value = timer-time_elapsed
 	if(lblTime.value<60)
 	{
-		console.log('true')
 		$("#lblTime").css('color','red');
 	}
 	for (var i = 0; i < 16; i++) {
@@ -303,10 +318,15 @@ function Draw(x) {
 				context.fill();
 			
 			}
+			else if (board[i][j]=== 12)
+			{
+				var timerImage = document.getElementById('watch');
+				context.drawImage(timerImage, center.x -30, center.y-30,40,40);
+			}
 			if(board[i][j]==11)
 			{
 				var image = document.getElementById('monsterpic');
-				context.drawImage(image, center.x -30, center.y-30,60,60);
+				context.drawImage(image, center.x -25, center.y-30,60,60);
 			}
 		}
 	}
@@ -345,7 +365,9 @@ function updatePosition2()
 	else if(board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]==9){
 		monsterShapes[i].largeBack=true;
 	}
-
+	else if(board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]==12){
+		monsterShapes[i].watchBack=true;
+	}
 
 	if(board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]==2)
 	{
@@ -353,7 +375,6 @@ function updatePosition2()
 	
 		if(livesCounter==0)
 		{
-			console.log('done1')
 			gameOver();
 			break;
 		}
@@ -414,7 +435,6 @@ function UpdatePosition() {
 		if(livesCounter==0)
 		{
 			$("#song").get(0).pause();
-			console.log('done2')
 			gameOver();
 		}
 		else{
@@ -442,12 +462,16 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 9) {
 		score=score+25;	
 	}
+	if (board[shape.i][shape.j] == 12) {
+		downTime=30;
+	}
 
 
 	
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
+	time_elapsed=time_elapsed-downTime;
 	if(time_elapsed-timer>0)
 	{
 		gameTimeOver()
@@ -462,6 +486,11 @@ function UpdatePosition() {
 	{
 		$("#song").get(0).pause();
 		
+	}
+
+	if(checkEmptyFood())
+	{
+		gameWinner();
 	}
 }
 
@@ -540,7 +569,7 @@ createMonsters =(monsters) =>{
 			monsterDetails.smallBack=false
 			monsterDetails.mediumBack=false;
 			monsterDetails.largeBack=false;
-
+			monsterDetails.watchBack=false;
 			if(board[i][0]==7){
 				monsterDetails.smallBack=true;
 				}
@@ -549,6 +578,9 @@ createMonsters =(monsters) =>{
 				}
 				else if(board[i][0]==9){
 				monsterDetails.largeBack=true;
+				}
+				else if(board[i][0]==12){
+				monsterDetails.watchBack=true;
 				}
 			
 			board[i][0]=11
@@ -597,6 +629,20 @@ gameTimeOver = () =>{
 
 }
 
+gameWinner = () =>{
+
+	endGame=true;
+	$("#song").get(0).pause();
+	clearInterval(interval);
+	$('<p style="font-family:bubble; font-size:28px; color:black;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
+	var modal = document.querySelector(".GameOvermodal");
+	$('.GameOvermodal').show();
+	modal.classList.toggle("show-modal");
+	$('#loser').hide();
+	$('#video2')[0].play();
+}
+
+
 drawBack = (monsterDetail) =>{
 	if(monsterDetail.smallBack){
 		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=7;
@@ -610,8 +656,37 @@ drawBack = (monsterDetail) =>{
 		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=9;
 		monsterDetail.largeBack=false;
 	}
+	else if(monsterDetail.watchBack)
+	{
+		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=12;
+		monsterDetail.watchBack=false;
+	}
 	else
 	{
 		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=0;
 	}
+}
+
+checkEmptyFood = () =>{
+
+for(var i=0; i<16; i++)
+{
+	for(var j=0; j<10; j++)
+	{
+		if(board[i][j]==9||board[i][j]==8||board[i][j]==7)
+		{
+			return false;
+		}
+	}
+}
+
+
+for(var i=0; i<monsters; i++)
+{
+	if(monsterShapes[i].smallBack==true || monsterShapes[i].mediumBack==true || monsterShapes[i].largeBack==true  )
+	{
+		return false;
+	}
+}
+return true;
 }
