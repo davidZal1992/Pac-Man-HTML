@@ -30,6 +30,7 @@ else{
     let found=users.find(user => user.userName==='p')
     if(!found)
     {
+        pUser={'userName':'p','password':'p'}
         users.push(pUser)
     }
 }
