@@ -192,7 +192,7 @@
 						</div>
 					<div class=form-group-settings>
 						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 5 Points balls:</span>
-						<input type="color"  onchange="test1(this)" placeholder=" 0" id="5balls" name="balls" />
+						<input type="color"  onchange="test(this)" placeholder=" 0" id="5balls" name="balls" />
 					</div>
 					<div class=form-group-settings>
 						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 15 Points balls:</span>
@@ -227,6 +227,10 @@
 			<source src="./assets/sound/error.mp3" type="audio/mp3">
 			Your browser does not support the audio tag.
 		</audio>
+		<audio  id="points">
+			<source src="./assets/sound/points.mp3" type="audio/mp3">
+			Your browser does not support the audio tag.
+		</audio>
 		<div id="game">
 			<div class="items">
 				<p  style="font-family:Bubble; color:white; font-size:28px; margin-left: 5%;" >Lives:
@@ -246,6 +250,7 @@
 			<img src="./assets/img/watch.png" id="watch">
 			<img src="./assets/img/logopac.png" id="newLive">
 			<img src="./assets/img/skeleton.png" id="skeleton">
+			<img src="./assets/img/candy.png" id="candy">
 			</canvas>
 			<div class="inner"><button type="submit"  class="msgBtn" id="restart"  ><i class="fas fa-sync-alt"></i> Restart</button></div>
 			<div class="inner">

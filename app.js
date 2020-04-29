@@ -2,9 +2,11 @@ var context;
 
 //pac shape
 var shape = new Object();
-
+var candyStop=false;
 //monsters
 var monsterShapes=[];
+//candy
+var candyShapes=[];
 
 //main board
 var board;
@@ -29,6 +31,7 @@ var watchBack;
 var livesBack;
 var skeltonBack;
 
+
 //end game
 var endGame=false;
 var downTime=0;
@@ -41,6 +44,7 @@ $(document).ready(function() {
 		$(".lives").show();
 		clearInterval(interval);
 		monsterShapes=[];
+		candyShapes=[];
 		Start();
 	})
 	//Prevent scrolling
@@ -183,8 +187,9 @@ function Start() {
 		shape.j =emptyCell[1];
 		pacman_remain--;
 		board[shape.i][shape.j] = 2;
+
 		
-		 emptyCell = findRandomEmptyCell(board);
+		emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]]=12;
 
 		 emptyCell = findRandomEmptyCell(board);
@@ -197,8 +202,9 @@ function Start() {
 	addEventListener(
 		"keydown",
 		function(e) {
-	
+
 			keysDown[e.keyCode] = true;
+
 
 		},
 		false
@@ -213,6 +219,7 @@ function Start() {
 
 
 	createMonsters(monsters)
+	createCandy()
 	interval=setInterval(UpdatePosition ,250);
 }
 
@@ -335,6 +342,11 @@ function Draw(x) {
 				var timerImage = document.getElementById('skeleton');
 				context.drawImage(timerImage, center.x-20 , center.y-20,40,40);
 			}
+			else if (board[i][j]=== 15)
+			{
+				var timerImage = document.getElementById('candy');
+				context.drawImage(timerImage, center.x-20 , center.y-20,40,40);
+			}
 			if(board[i][j]==11)
 			{
 				var image = document.getElementById('monsterpic');
@@ -346,13 +358,140 @@ function Draw(x) {
 
 
 
-function updatePosition2()
-{
 
+
+function UpdatePosition() {
+	updateMonsterPosition()
+	if(!candyStop){
+	updateCandyPosition()
+	}
+	updatePacmanPosition()
+	Draw(GetKeyPressed());
+}
+
+function updatePacmanPosition(){
+	board[shape.i][shape.j] = 0;
+	var x = GetKeyPressed();
+	//pacs moves
+	if (x == 1) {
+		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4 ) {
+			shape.j--;
+		}
+	}
+	if (x == 2) {
+		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+			shape.j++;
+		}
+	}
+	if (x == 3) {
+		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
+			shape.i--;
+		}
+	}
+	if (x == 4) {
+		if (shape.i < 16 && board[shape.i + 1][shape.j] != 4) {
+			shape.i++;
+		}
+	}
+	//monster meeting
+	if(board[shape.i][shape.j]==11)
+	{
+		if(livesCounter==0)
+		{
+			$("#song").get(0).pause();
+			gameOver();
+		}
+		else{
+		$("#live" +livesCounter).hide();
+		livesCounter--;
+		$("#song").get(0).pause();
+		$("#errorsong").get(0).play();
+		setTimeout(()=>{$("#song").get(0).play();},1000)
+		for(var i=0; i<monsters; i++)
+		{
+			drawBack(monsterShapes[i])
+		}
+		monsterShapes=[]
+		createMonsters(monsters)
+	}
+	}
+
+
+
+	//score calculate
+	if (board[shape.i][shape.j] == 7) {
+		score=score+5;	
+	}
+	if (board[shape.i][shape.j] == 8) {
+		score=score+15;	
+	}
+	if (board[shape.i][shape.j] == 9) {
+		score=score+25;	
+	}
+	if (board[shape.i][shape.j] == 12) {
+		downTime=30;
+	}
+	if(board[shape.i][shape.j]==15)
+	{
+	score=score+50;
+	$("#song").get(0).pause();
+	$("#points").get(0).play();
+	setTimeout(()=>{$("#song").get(0).play();},400)
+	candyStop=true;
+	}
+	//live decrease/increase
+	if (board[shape.i][shape.j] == 13&&livesCounter!=4) {
+			livesCounter++;
+			$("#live"+livesCounter).show();
+			$("#song").get(0).pause();
+			$("#points").get(0).play();
+			setTimeout(()=>{$("#song").get(0).play();},400)
+	}
+	if (board[shape.i][shape.j] == 14) {
+		if(livesCounter!=0)
+		{
+			$("#live"+livesCounter).hide();
+			livesCounter--;
+			$("#song").get(0).pause();
+			$("#errorsong").get(0).play();
+			setTimeout(()=>{$("#song").get(0).play();},1000)
+		}
+		else{
+			gameOver();
+		}
+	
+}
+
+
+	
+	board[shape.i][shape.j] = 2;
+	var currentTime = new Date();
+	time_elapsed = (currentTime - start_time) / 1000;
+	time_elapsed=time_elapsed-downTime;
+	if(time_elapsed-timer>0)
+	{
+		gameTimeOver()
+	}
+	if(endGame==true)
+	{
+		$("#song").get(0).pause();
+		
+	}
+
+	if(checkEmptyFood())
+	{
+		gameWinner();
+	}
+}
+
+
+function updateMonsterPosition()
+{
 	for(var i=0; i<monsters; i++)
 	{
-	drawBack(monsterShapes[i]);
 	
+	drawBack(monsterShapes[i])
+
 	var possibleMove=getPossibleMinimumDistance(monsterShapes[i].monShape);
 
 		if(possibleMove==='up'){
@@ -420,111 +559,59 @@ function updatePosition2()
 }
 
 
+function updateCandyPosition()
 
-function UpdatePosition() {
-	
-	updatePosition2()
-	board[shape.i][shape.j] = 0;
-	var x = GetKeyPressed();
-	//pacs moves
-	if (x == 1) {
-		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4 ) {
-			shape.j--;
-		}
+{
+	drawBackforCandy(candyShapes[0]);
+
+	var possibleMove = candyPossibleMove(candyShapes[0].candyShape)
+	if(possibleMove==='up'){
+		candyShapes[0].candyShape.j--;
 	}
-	if (x == 2) {
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
-			shape.j++;
-		}
+	if(possibleMove==='left'){
+		candyShapes[0].candyShape.i--;
 	}
-	if (x == 3) {
-		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
-			shape.i--;
-		}
+	if(possibleMove==='right'){
+		candyShapes[0].candyShape.i++;
 	}
-	if (x == 4) {
-		if (shape.i < 16 && board[shape.i + 1][shape.j] != 4) {
-			shape.i++;
-		}
-	}
-	//monster meeting
-	if(board[shape.i][shape.j]==11)
-	{
-		if(livesCounter==0)
-		{
-			$("#song").get(0).pause();
-			gameOver();
-		}
-		else{
-		$("#live" +livesCounter).hide();
-		livesCounter--;
-		$("#song").get(0).pause();
-		$("#errorsong").get(0).play();
-		setTimeout(()=>{$("#song").get(0).play();},1000)
-		for(var i=0; i<monsters; i++)
-		{
-			drawBack(monsterShapes[i])
-		}
-		monsterShapes=[]
-		createMonsters(monsters)
-	}
+	if(possibleMove==='down'){
+		candyShapes[0].candyShape.j++;
 	}
 
-
-
-	//score calculate
-	if (board[shape.i][shape.j] == 7) {
-		score=score+5;	
-	}
-	if (board[shape.i][shape.j] == 8) {
-		score=score+15;	
-	}
-	if (board[shape.i][shape.j] == 9) {
-		score=score+25;	
-	}
-	if (board[shape.i][shape.j] == 12) {
-		downTime=30;
-	}
-
-	//live decrease/increase
-	if (board[shape.i][shape.j] == 13&&livesCounter!=4) {
-			livesCounter++;
-			$("#live"+livesCounter).show();
-	}
-	if (board[shape.i][shape.j] == 14) {
-		if(livesCounter!=0)
-		{
-			$("#live"+livesCounter).hide();
-			livesCounter--;
-		}
-		else{
-			gameOver();
-		}
-	
+if(	board[candyShapes[0].candyShape.i][candyShapes[0].candyShape.j]==7){
+	candyShapes[0].smallBack=true;
+}
+else if(board[candyShapes[0].candyShape.i][candyShapes[0].candyShape.j]==8){
+	candyShapes[0].mediumBack=true;
+}
+else if(board[candyShapes[0].candyShape.i][candyShapes[0].candyShape.j]==9){
+	candyShapes[0].largeBack=true;
+}
+else if(board[candyShapes[0].candyShape.i][candyShapes[0].candyShape.j]==12){
+	candyShapes[0].watchBack=true;
+}
+else if(board[candyShapes[0].candyShape.i][candyShapes[0].candyShape.j]==13){
+	candyShapes[0].livesBack=true;
+}
+else if(board[candyShapes[0].candyShape.i][candyShapes[0].candyShape.j]==14){
+	candyShapes[0].skeltonBack=true;
 }
 
+if(board[candyShapes[0].candyShape.i][candyShapes[0].candyShape.j]==2)
+{
+	score=score+50;
+	$("#song").get(0).pause();
+	$("#points").get(0).play();
+	setTimeout(()=>{$("#song").get(0).play();},400)
+	candyStop=true;
+}
+else{
+	board[candyShapes[0].candyShape.i][candyShapes[0].candyShape.j]=15;
 
 	
-	board[shape.i][shape.j] = 2;
-	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
-	time_elapsed=time_elapsed-downTime;
-	if(time_elapsed-timer>0)
-	{
-		gameTimeOver()
-	}
-	Draw(GetKeyPressed());
-	if(endGame==true)
-	{
-		$("#song").get(0).pause();
-		
-	}
-
-	if(checkEmptyFood())
-	{
-		gameWinner();
-	}
 }
+}
+
 
 function make_base(centerx,centery,direction){
 var image = document.getElementById(direction);
@@ -545,94 +632,160 @@ getPossibleMinimumDistance = (monsterShape) =>{
 	distances.sort((a,b) => a[0]-b[0]);
 		var value=Math.random()
 		if(value>0.4){
-		if(possibleMove(distances[0][1],monsterShape))
+		if(monsterPossibleMove(distances[0][1],monsterShape))
 		{
 			return distances[0][1];
 		}
-		else if(possibleMove(distances[1][1],monsterShape)){
+		else if(monsterPossibleMove(distances[1][1],monsterShape)){
 			return distances[1][1]
 		}
-		else if(possibleMove(distances[2][1],monsterShape)){
+		else if(monsterPossibleMove(distances[2][1],monsterShape)){
 			return distances[2][1]
 		}
-		else if(possibleMove(distances[3][1],monsterShape)){
+		else if(monsterPossibleMove(distances[3][1],monsterShape)){
 			return distances[3][1]
 		}
 	}
 	else
 	{	
-		if(possibleMove(distances[3][1],monsterShape))
+		if(monsterPossibleMove(distances[3][1],monsterShape))
 		{
 			return distances[3][1];
 		}
-		else if(possibleMove(distances[2][1],monsterShape)){
+		else if(monsterPossibleMove(distances[2][1],monsterShape)){
 			return distances[2][1]
 		}
-		else if(possibleMove(distances[1][1],monsterShape)){
+		else if(monsterPossibleMove(distances[1][1],monsterShape)){
 			return distances[1][1]
 		}
-		else if(possibleMove(distances[0][1],monsterShape)){
+		else if(monsterPossibleMove(distances[0][1],monsterShape)){
 			return distances[0][1]
 		}
 	}
 }
 
-possibleMove = (string,monsterShape) =>{
 
-		if(string==='left'&& monsterShape.i > 0 && board[monsterShape.i-1][monsterShape.j] != 4  && board[monsterShape.i-1][monsterShape.j] != 11)
+monsterPossibleMove = (string,monsterShape) =>{
+	
+		
+		if(string==='left'&& monsterShape.i > 0 && board[monsterShape.i-1][monsterShape.j] != 4  && board[monsterShape.i-1][monsterShape.j] != 11 && board[monsterShape.i-1][monsterShape.j] != 15)
 		return true;
-		if(string==='up'&& monsterShape.j > 0 && board[monsterShape.i][monsterShape.j-1 ] != 4 && board[monsterShape.i][monsterShape.j-1 ] != 11 )
+
+		if(string==='up'&& monsterShape.j > 0 && board[monsterShape.i][monsterShape.j-1 ] != 4 && board[monsterShape.i][monsterShape.j-1 ] != 11  && board[monsterShape.i][monsterShape.j-1 ] != 15)
 		return true;
-		if(string==='right'&& monsterShape.i < 15 && board[monsterShape.i+1][monsterShape.j] != 4 && board[monsterShape.i+1][monsterShape.j] != 11)
+
+		if(string==='right'&& monsterShape.i < 15 && board[monsterShape.i+1][monsterShape.j] != 4 && board[monsterShape.i+1][monsterShape.j] != 11 && board[monsterShape.i+1][monsterShape.j] != 15)
 		return true;
-		if(string==='down'&& monsterShape.j < 9 && board[monsterShape.i][monsterShape.j + 1] != 4 && board[monsterShape.i][monsterShape.j + 1] != 11)
+
+		if(string==='down'&& monsterShape.j < 9 && board[monsterShape.i][monsterShape.j + 1] != 4 && board[monsterShape.i][monsterShape.j + 1] != 11 && board[monsterShape.i][monsterShape.j + 1] != 15)
 		return true;
 
 		return false;
 }
 
 
-createMonsters =(monsters) =>{
-		
-		for(var i=0; i<monsters; i++)
-		{
-			var monsterDetails=[];
-			let monShape=new Object();
-			monsterDetails.smallBack=false
-			monsterDetails.mediumBack=false;
-			monsterDetails.largeBack=false;
-			monsterDetails.watchBack=false;
-			monsterDetails.livesBack=false;
-			monsterDetails.skeltonBack=false;
-			if(board[i][0]==7){
-				monsterDetails.smallBack=true;
-				}
-				else if(board[i][0]==8){
-				monsterDetails.mediumBack=true;
-				}
-				else if(board[i][0]==9){
-				monsterDetails.largeBack=true;
-				}
-				else if(board[i][0]==12){
-				monsterDetails.watchBack=true;
-				}
-				else if(board[i][0]==13){
-				monsterDetails.livesBack=true;
-				}
-				else if(board[i][0]==14){
-				monsterDetails.skeltonBack=true;
-				}
-			
-			board[i][0]=11
-			monShape.i=i;
-			monShape.j=0;
+candyPossibleMove = (candyShape) =>
+{
 
-			monsterDetails.monShape=monShape;
-			monsterShapes.push(monsterDetails);
-		}
+	var number=Math.floor(Math.random()*4)
+	if(number==0){
+
+	if(candyShape.i > 0 && board[candyShape.i-1][candyShape.j] != 4  && board[candyShape.i-1][candyShape.j] != 11){
+		return 'left';
+	}
+	}
+	if(number==1){
+		if(candyShape.j > 0 && board[candyShape.i][candyShape.j-1 ] != 4 && board[candyShape.i][candyShape.j-1 ] != 11)
+		return 'up';
+	}
+	if(number==2){
+		if(candyShape.i < 15 && board[candyShape.i+1][candyShape.j] != 4 && board[candyShape.i+1][candyShape.j] != 11)
+		return 'right';
+	}
+	if(number==3){
+		if( candyShape.j < 9 && board[candyShape.i][candyShape.j + 1] != 4 && board[candyShape.i][candyShape.j + 1] != 11)
+		return 'down';
+	}
+}
+
+createMonsters = (monsters) =>{
+		
+	for(var i=0; i<monsters; i++)
+	{
+		var monsterDetails=[];
+		let monShape=new Object();
+		monsterDetails.smallBack=false
+		monsterDetails.mediumBack=false;
+		monsterDetails.largeBack=false;
+		monsterDetails.watchBack=false;
+		monsterDetails.livesBack=false;
+		monsterDetails.skeltonBack=false;
+		if(board[i][0]==7){
+			monsterDetails.smallBack=true;
+			}
+			else if(board[i][0]==8){
+			monsterDetails.mediumBack=true;
+			}
+			else if(board[i][0]==9){
+			monsterDetails.largeBack=true;
+			}
+			else if(board[i][0]==12){
+			monsterDetails.watchBack=true;
+			}
+			else if(board[i][0]==13){
+			monsterDetails.livesBack=true;
+			}
+			else if(board[i][0]==14){
+			monsterDetails.skeltonBack=true;
+			}
+		
+		board[i][0]=11
+		monShape.i=i;
+		monShape.j=0;
+
+		monsterDetails.monShape=monShape;
+		monsterShapes.push(monsterDetails);
+	}
 
 }
 
+createCandy = () =>{
+	let candyShape=new Object();
+	let candyDetails=[];
+	candyDetails.smallBack=false
+	candyDetails.mediumBack=false;
+	candyDetails.largeBack=false;
+	candyDetails.watchBack=false;
+	candyDetails.livesBack=false;
+	candyDetails.skeltonBack=false;
+
+		if(board[15][0]==7){
+		candyDetails.smallBack=true;
+		}
+		else if(board[15][0]==8){
+		candyDetails.mediumBack=true;
+		}
+		else if(board[15][0]==9){
+		candyDetails.largeBack=true;
+		}
+		else if(board[15][0]==12){
+		candyDetails.watchBack=true;
+		}
+		else if(board[15][0]==13){
+		candyDetails.livesBack=true;
+		}
+		else if(board[15][0]==14){
+		candyDetails.skeltonBack=true;
+		}
+		board[15][0]=15;
+		candyShape.i=15;
+		candyShape.j=0;
+		console.log(candyShape)
+		candyDetails.candyShape=candyShape;
+		console.log(candyDetails)
+		candyShapes.push(candyDetails);
+
+}
 gameOver = () =>{
 	endGame=true;
 	$("#song").get(0).pause();
@@ -683,39 +836,76 @@ gameWinner = () =>{
 }
 
 
-drawBack = (monsterDetail) =>{
-	if(monsterDetail.smallBack){
-		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=7;
-		monsterDetail.smallBack=false;
+drawBack = (shapeDetails) =>{
+	if(shapeDetails.smallBack){
+		board[shapeDetails.monShape.i][shapeDetails.monShape.j]=7;
+		shapeDetails.smallBack=false;
 	}
-	else if(monsterDetail.mediumBack){
-		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=8;
-		monsterDetail.mediumBack=false;
+	else if(shapeDetails.mediumBack){
+		board[shapeDetails.monShape.i][shapeDetails.monShape.j]=8;
+		shapeDetails.mediumBack=false;
 	}
-	else if(monsterDetail.largeBack){
-		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=9;
-		monsterDetail.largeBack=false;
+	else if(shapeDetails.largeBack){
+		board[shapeDetails.monShape.i][shapeDetails.monShape.j]=9;
+		shapeDetails.largeBack=false;
 	}
-	else if(monsterDetail.watchBack)
+	else if(shapeDetails.watchBack)
 	{
-		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=12;
-		monsterDetail.watchBack=false;
+		board[shapeDetails.monShape.i][shapeDetails.monShape.j]=12;
+		shapeDetails.watchBack=false;
 	}
-	else if(monsterDetail.livesBack)
+	else if(shapeDetails.livesBack)
 	{
-		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=13;
-		monsterDetail.livesBack=false;
+		board[shapeDetails.monShape.i][shapeDetails.monShape.j]=13;
+		shapeDetails.livesBack=false;
 	}
-	else if(monsterDetail.skeltonBack)
+	else if(shapeDetails.skeltonBack)
 	{
-		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=14;
-		monsterDetail.skeltonBack=false;
+		board[shapeDetails.monShape.i][shapeDetails.monShape.j]=14;
+		shapeDetails.skeltonBack=false;
 	}
 	else
 	{
-		board[monsterDetail.monShape.i][monsterDetail.monShape.j]=0;
+		board[shapeDetails.monShape.i][shapeDetails.monShape.j]=0;
 	}
 }
+
+
+drawBackforCandy = (shapeDetails) =>{
+	if(shapeDetails.smallBack){
+		board[shapeDetails.candyShape.i][shapeDetails.candyShape.j]=7;
+		shapeDetails.smallBack=false;
+	}
+	else if(shapeDetails.mediumBack){
+		board[shapeDetails.candyShape.i][shapeDetails.candyShape.j]=8;
+		shapeDetails.mediumBack=false;
+	}
+	else if(shapeDetails.largeBack){
+		board[shapeDetails.candyShape.i][shapeDetails.candyShape.j]=9;
+		shapeDetails.largeBack=false;
+	}
+	else if(shapeDetails.watchBack)
+	{
+		board[shapeDetails.candyShape.i][shapeDetails.candyShape.j]=12;
+		shapeDetails.watchBack=false;
+	}
+	else if(shapeDetails.livesBack)
+	{
+		board[shapeDetails.candyShape.i][shapeDetails.candyShape.j]=13;
+		shapeDetails.livesBack=false;
+	}
+	else if(shapeDetails.skeltonBack)
+	{
+		board[shapeDetails.candyShape.i][shapeDetails.candyShape.j]=14;
+		shapeDetails.skeltonBack=false;
+	}
+	else
+	{
+		board[shapeDetails.candyShape.i][shapeDetails.candyShape.j]=0;
+	}
+}
+
+
 
 checkEmptyFood = () =>{
 

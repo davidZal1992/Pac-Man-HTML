@@ -101,6 +101,7 @@ $( ".moveup" ).keydown(function(e) {
     e.preventDefault();
     if(longButton(buttonPressed)!=="")
       {
+        console.log("choosen " + e.keyCode)
         let newKey=longButton(buttonPressed);
         moveKeys['up']=newKey.value;
         $(".moveup").val(newKey.key);
@@ -138,7 +139,7 @@ $( ".movedown" ).keydown(function(e) {
         moveKeys['down']=newKey.value;
         $(".movedown").val(newKey.key);
         $(".movedown").css("width","35%")
-        moveKeys['up']=e.keyCode;
+        moveKeys['down']=e.keyCode;
         return;
       }
     if(shortButton(buttonPressed)!=="")
@@ -148,7 +149,7 @@ $( ".movedown" ).keydown(function(e) {
         moveKeys['down']=newKey.value;
         $(".movedown").val(newKey.key);
         $(".movedown").css("width","48px")
-        moveKeys['up']=e.keyCode;
+        moveKeys['down']=e.keyCode;
         return;
       }
 
@@ -170,7 +171,7 @@ $( ".moveright" ).keydown(function(e) {
         moveKeys['right']=newKey.value;
         $(".moveright").val(newKey.key);
         $(".moveright").css("width","35%")
-        moveKeys['up']=e.keyCode;
+        moveKeys['right']=e.keyCode;
         return;
       }
     if(shortButton(buttonPressed)!=="")
@@ -180,7 +181,7 @@ $( ".moveright" ).keydown(function(e) {
         moveKeys['right']=newKey.value;
         $(".moveright").val(newKey.key);
         $(".moveright").css("width","48px")
-        moveKeys['up']=e.keyCode;
+        moveKeys['right']=e.keyCode;
         return;
       }
 
@@ -204,7 +205,7 @@ $( ".moveleft" ).keydown(function(e) {
         moveKeys['left']=newKey.value;
         $(".moveleft").val(newKey.key);
         $(".moveleft").css("width","35%")
-        moveKeys['up']=e.keyCode;
+        moveKeys['left']=e.keyCode;
         return;
       }
     if(shortButton(buttonPressed)!=="")
@@ -214,7 +215,7 @@ $( ".moveleft" ).keydown(function(e) {
         moveKeys['left']=newKey.value;
         $(".moveleft").val(newKey.key);
         $(".moveleft").css("width","48px")
-        moveKeys['up']=e.keyCode;
+        moveKeys['left']=e.keyCode;
         return;
       }
 
