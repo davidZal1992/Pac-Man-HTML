@@ -41,6 +41,8 @@ $(document).ready(function() {
 	context = canvas.getContext("2d");
 
 	$('#restart').click(function(){
+		$("#song").attr("src", "./assets/sound/pacsong.mp3");
+		$("#song").get(0).play();
 		$(".lives").show();
 		clearInterval(interval);
 		monsterShapes=[];
@@ -49,6 +51,7 @@ $(document).ready(function() {
 	})
 	//Prevent scrolling
 	$('#restartLose').click(function(){
+		$("#song").attr("src", "./assets/sound/pacsong.mp3");
 		clearInterval(interval);
 		$(".lives").show();
 		$('#endPar').text("");
@@ -58,6 +61,7 @@ $(document).ready(function() {
 		$("#video1").get(0).pause();
 		$("#song").get(0).play();
 		monsterShapes=[];
+		candyShapes=[];
 		Start();
 	})
 });
@@ -474,7 +478,11 @@ function updatePacmanPosition(){
 	}
 	if(endGame==true)
 	{
-		$("#song").get(0).pause();
+		var myAudio = document.getElementById('song');
+		while(!myAudio.paused)
+		{
+			$("#song").get(0).pause();
+		}
 		
 	}
 
@@ -788,12 +796,12 @@ createCandy = () =>{
 }
 gameOver = () =>{
 	endGame=true;
-	$("#song").get(0).pause();
-	$('<p style="font-family:Bowlby One SC, cursive;  font-size:28px; color:black;">Score: <span style="color:blue">'+score+'</span><br>You Loser!!!</p>').appendTo("#endPar")
+	$('<p style="font-family:Bowlby One SC, cursive;  font-size:28px; color:white;">Score: <span style="color:blue">'+score+'</span><br>You Loser!!!</p>').appendTo("#endPar")
 	clearInterval(interval);
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
+	$("#song").attr("src", "");
 	$('#winner').hide();
 	$('#video1')[0].play();
 
@@ -801,10 +809,10 @@ gameOver = () =>{
 
 gameTimeOver = () =>{
 	endGame=true;
-	$("#song").get(0).pause();
 	clearInterval(interval);
+	$("#song").get(0).pause();
 	if(score<100){
-	$('<p style="font-family:Bowlby One SC, cursive;  font-size:28px; color:black;">Score: <span style="color:blue">You are better than '+score+' points! </span></p>').appendTo("#endPar")
+	$('<p style="font-family:Bowlby One SC, cursive;  font-size:28px; color:white;">Score: <span style="color:blue">You are better than '+score+' points! </span></p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
@@ -812,7 +820,7 @@ gameTimeOver = () =>{
 	$('#video1')[0].play();
 	}
 	else{
-	$('<p style=font-family:Bowlby One SC, cursive;  font-size:28px; color:black;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
+	$('<p style=font-family:Bowlby One SC, cursive;  font-size:28px; color:white;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
@@ -827,11 +835,13 @@ gameWinner = () =>{
 	endGame=true;
 	$("#song").get(0).pause();
 	clearInterval(interval);
-	$('<p style="font-family:Bowlby One SC, cursive; font-size:28px; color:black;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
+	$('<p style="font-family:Bowlby One SC, cursive; font-size:28px; color:white;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
+	console.log('showWinner')
 	$('#loser').hide();
+	$('#show').hide();
 	$('#video2')[0].play();
 }
 
