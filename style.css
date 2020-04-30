@@ -420,9 +420,9 @@ width:120px;
 }
 
 .inputgame{
-    width: 10%;
+    width: 20%;
     font-size: 22px;
-    font-family: 'Bubble';
+    font-family:'Bowlby One SC';
     color:black;
     border:none;
     background-color: transparent;
@@ -449,4 +449,18 @@ width:120px;
     font-size: 32px;
     color:white;
     margin-left:5%;
+}
+
+.innerleft{
+    font-family: 'Bubble';
+    font-size: 20px;
+    color:white;
+    margin-left:5%;
+}
+
+.inneright{
+    font-family: 'Bubble';
+    font-size: 20px;
+    color:white;
+    margin-right:8%;
 }

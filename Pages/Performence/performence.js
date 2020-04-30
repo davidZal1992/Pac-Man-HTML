@@ -459,6 +459,7 @@ $('#formsettings').submit(function(e){
     mediumColorBall= $('#15balls').val();
     largeColorBall= $('#25balls').val();
 
+    timer=parseInt(timer)
   
     ballsMatch=$('#ball').val();
     monsters=$('#monster').val(); 
@@ -469,13 +470,21 @@ $('#formsettings').submit(function(e){
   $('#logo').show();
    $('#navbar').show();
    $('#or').text("Welcome " +userName +"!")
-   $('<p id="currentMsg"> <span style="text-decoration:underline; color:gray;">Keys:</span><br> Move up:' +$(".moveup").val() + '<br> Move down:' +$(".movedown").val() +'<br>Move left:' + $(".moveleft").val()+
-   '<br> Move right: ' +$(".moveright").val() + '<br><br>  <span style="text-decoration:underline; color:gray;">Time:</span> <br>Time per game: '+ timer +  '<br><br><span style="text-decoration:underline; color:gray;">Structre:</span><br>'+' Number of food balls :' +ballsMatch +
-   '<br>    Number of monsters: '+monsters+
-   '<br> Color of 5 points balls: <span><i style="color:'+smallColorBall+';"class="fas fa-circle"></i></i><span>'+
-   '<br> Color of 15 points balls:<span><i style="color:'+mediumColorBall+';"class="fas fa-circle"></i></i><span>'+
-   '<br>  Color of 25 points balls: <span><i style="color:'+largeColorBall+';"class="fas fa-circle"></i></i><span>'+
-   '</p>').appendTo('#currentMsg')
+   
+   //footer left
+
+   $('#leftside').html('Move up:' +$(".moveup").val() +'<br>'+
+   'Move down:' +$(".movedown").val() +'<br>'+
+   'Move left:' + $(".moveleft").val()+'<br>'+
+   'Move right: ' +$(".moveright").val())
+   
+//footer rgiht
+        
+   $('#rightside').html(
+   +Math.floor(ballsMatch*0.6)+' of 5 Pts color:<i style="color:'+smallColorBall+';"class="fas fa-circle"></i><br>'+
+   +Math.floor(ballsMatch*0.3)+' of 15 Pts color:<i style="color:'+mediumColorBall+';"class="fas fa-circle"></i><br>'+
+   +Math.floor(ballsMatch*0.1)+' of 25 Pts color: <i style="color:'+largeColorBall+';"class="fas fa-circle"></i><br>'+
+   'time: '+timer)
    $('#startgame').show();
    $("#song").get(0).play();
    $('#video1')[0].play();

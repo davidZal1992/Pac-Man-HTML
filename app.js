@@ -51,6 +51,7 @@ $(document).ready(function() {
 		clearInterval(interval);
 		monsterShapes=[];
 		candyShapes=[];
+		candyStop=false;
 		Start();
 	})
 	//Prevent scrolling
@@ -70,6 +71,7 @@ $(document).ready(function() {
 		$("#song").get(0).play();
 		monsterShapes=[];
 		candyShapes=[];
+		candyStop=false;
 		Start();
 	})
 });
@@ -263,7 +265,7 @@ function GetKeyPressed() {
 function Draw(x) {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = timer-time_elapsed
+	lblTime.value = Math.floor(timer-time_elapsed)
 	if(lblTime.value<60)
 	{
 		$("#lblTime").css('color','red');
@@ -445,7 +447,8 @@ function updatePacmanPosition(){
 		score=score+25;	
 	}
 	if (board[shape.i][shape.j] == 12) {
-		downTime=30;
+		console.log('gotya')
+		timer=parseInt(timer)+30
 	}
 	if(board[shape.i][shape.j]==15)
 	{
@@ -482,8 +485,7 @@ function updatePacmanPosition(){
 	
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
-	time_elapsed = (currentTime - start_time) / 1000;
-	time_elapsed=time_elapsed-downTime;
+	time_elapsed = Math.floor(((currentTime - start_time) / 1000));
 	if(time_elapsed-timer>0)
 	{
 		gameTimeOver()
