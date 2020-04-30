@@ -813,7 +813,7 @@ gameTimeOver = () =>{
 	clearInterval(interval);
 	$("#song").get(0).pause();
 	if(score<100){
-	$('<p style="font-family:Bowlby One SC, cursive;  font-size:28px; color:white;">Score: <span style="color:blue">You are better than '+score+' points! </span></p>').appendTo("#endPar")
+	$('<p style="font-family:Bowlby One SC, cursive;  font-size:28px; color:white;">Score: <span style="color:orange">You are better than '+score+' points! </span></p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
