@@ -41,9 +41,13 @@ $(document).ready(function() {
 	context = canvas.getContext("2d");
 
 	$('#restart').click(function(){
+		for(var i=1; i<=4; i++)
+		{
+			$("#live"+i).css('visibility', 'visible');
+		}
 		$("#song").attr("src", "./assets/sound/pacsong.mp3");
 		$("#song").get(0).play();
-		$(".lives").show();
+		$(".lives").css
 		clearInterval(interval);
 		monsterShapes=[];
 		candyShapes=[];
@@ -51,6 +55,10 @@ $(document).ready(function() {
 	})
 	//Prevent scrolling
 	$('#restartLose').click(function(){
+		for(var i=1; i<=4; i++)
+		{
+			$("#live"+i).css('visibility', 'visible');
+		}
 		$("#song").attr("src", "./assets/sound/pacsong.mp3");
 		clearInterval(interval);
 		$(".lives").show();
@@ -796,7 +804,7 @@ createCandy = () =>{
 	candyDetails.watchBack=false;
 	candyDetails.livesBack=false;
 	candyDetails.skeltonBack=false;
-	if(monster<=3){
+	if(monsters<=3){
 		t=15;
 		k=0;
 	}
@@ -823,6 +831,7 @@ createCandy = () =>{
 		else if(board[t][k]==14){
 		candyDetails.skeltonBack=true;
 		}
+
 		board[t][k]=15;
 		candyShape.i=t;
 		candyShape.j=k;
