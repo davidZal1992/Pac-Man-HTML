@@ -228,11 +228,11 @@ function Start() {
 }
 
 function findRandomEmptyCell(board) {
-	var i = Math.floor(Math.random() * 15 + 1);
-	var j = Math.floor(Math.random() * 9 + 1);
+	var i = Math.floor(Math.random() * 16);
+	var j = Math.floor(Math.random() * 10);
 	while (board[i][j] != 0) {
-		i = Math.floor(Math.random() * 15 + 1);
-		j = Math.floor(Math.random() * 9 + 1);
+		i = Math.floor(Math.random() * 16);
+		j = Math.floor(Math.random() * 10);
 	}
 	return [i, j];
 }
@@ -406,6 +406,10 @@ function updatePacmanPosition(){
 			gameOver();
 		}
 		else{
+		let newCell=findRandomEmptyCell(board)
+		console.log(newCell + "update new cell")
+		shape.i=newCell[0];
+		shape.j=newCell[1];
 		$("#live"+livesCounter).css('visibility', 'hidden');
 		livesCounter--;
 		$("#song").get(0).pause();
@@ -537,13 +541,16 @@ function updateMonsterPosition()
 	if(board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]==2)
 	{
 		//TODO: IF YOU EAT BY MONSTER
-	
+		board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]=0;
 		if(livesCounter==0)
 		{
 			gameOver();
 			break;
 		}
 		else{
+		let newCell=findRandomEmptyCell(board);
+		shape.i=newCell[0];
+		shape.j=newCell[1];
 		$("#song").get(0).pause();
 		$("#errorsong").get(0).play();
 		setTimeout(()=>{$("#song").get(0).play();},1000)
@@ -558,11 +565,11 @@ function updateMonsterPosition()
 		i=0;
 		createMonsters(monsters)
 		}
+		
 	}	
-	else
-	{
-		board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]=11
-	}
+		else{
+		board[monsterShapes[i].monShape.i][monsterShapes[i].monShape.j]=11;
+		}
 	}
 }
 
