@@ -727,6 +727,8 @@ createMonsters = (monsters) =>{
 		
 	for(var i=0; i<monsters; i++)
 	{
+		var t;
+		var k;
 		var monsterDetails=[];
 		let monShape=new Object();
 		monsterDetails.smallBack=false
@@ -735,28 +737,48 @@ createMonsters = (monsters) =>{
 		monsterDetails.watchBack=false;
 		monsterDetails.livesBack=false;
 		monsterDetails.skeltonBack=false;
-		if(board[i][0]==7){
+		if(i==0)
+		{
+			k=0
+			t=0
+		}
+		if(i==1)
+		{
+			k=15
+			t=9
+		}
+		if(i==2)
+		{
+			k=0
+			t=9
+		}
+		if(i==3)
+		{
+			k=15
+			t=0
+		}
+		if(board[k][t]==7){
 			monsterDetails.smallBack=true;
 			}
-			else if(board[i][0]==8){
+			else if(board[k][t]==8){
 			monsterDetails.mediumBack=true;
 			}
-			else if(board[i][0]==9){
+			else if(board[k][t]==9){
 			monsterDetails.largeBack=true;
 			}
-			else if(board[i][0]==12){
+			else if(board[k][t]==12){
 			monsterDetails.watchBack=true;
 			}
-			else if(board[i][0]==13){
+			else if(board[k][t]==13){
 			monsterDetails.livesBack=true;
 			}
-			else if(board[i][0]==14){
+			else if(board[k][t]==14){
 			monsterDetails.skeltonBack=true;
 			}
 		
-		board[i][0]=11
-		monShape.i=i;
-		monShape.j=0;
+		board[k][t]=11
+		monShape.i=k;
+		monShape.j=t;
 
 		monsterDetails.monShape=monShape;
 		monsterShapes.push(monsterDetails);
@@ -767,37 +789,45 @@ createMonsters = (monsters) =>{
 createCandy = () =>{
 	let candyShape=new Object();
 	let candyDetails=[];
+	var t;
 	candyDetails.smallBack=false
 	candyDetails.mediumBack=false;
 	candyDetails.largeBack=false;
 	candyDetails.watchBack=false;
 	candyDetails.livesBack=false;
 	candyDetails.skeltonBack=false;
-
-		if(board[15][0]==7){
+	if(monster<=3){
+		t=15;
+		k=0;
+	}
+	else{
+		var emptyRand=findRandomEmptyCell(board)
+		t=emptyRand[0];
+		k=emptyRand[1];
+	}
+		if(board[t][k]==7){
 		candyDetails.smallBack=true;
 		}
-		else if(board[15][0]==8){
+		else if(board[t][k]==8){
 		candyDetails.mediumBack=true;
 		}
-		else if(board[15][0]==9){
+		else if(board[t][k]==9){
 		candyDetails.largeBack=true;
 		}
-		else if(board[15][0]==12){
+		else if(board[t][k]==12){
 		candyDetails.watchBack=true;
 		}
-		else if(board[15][0]==13){
+		else if(board[t][k]==13){
 		candyDetails.livesBack=true;
 		}
-		else if(board[15][0]==14){
+		else if(board[t][k]==14){
 		candyDetails.skeltonBack=true;
 		}
-		board[15][0]=15;
-		candyShape.i=15;
-		candyShape.j=0;
-		console.log(candyShape)
+		board[t][k]=15;
+		candyShape.i=t;
+		candyShape.j=k;
+
 		candyDetails.candyShape=candyShape;
-		console.log(candyDetails)
 		candyShapes.push(candyDetails);
 
 }
