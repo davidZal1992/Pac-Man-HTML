@@ -406,7 +406,7 @@ function updatePacmanPosition(){
 			gameOver();
 		}
 		else{
-		$("#live" +livesCounter).hide();
+		$("#live"+livesCounter).css('visibility', 'hidden');
 		livesCounter--;
 		$("#song").get(0).pause();
 		$("#errorsong").get(0).play();
@@ -446,7 +446,7 @@ function updatePacmanPosition(){
 	//live decrease/increase
 	if (board[shape.i][shape.j] == 13&&livesCounter!=4) {
 			livesCounter++;
-			$("#live"+livesCounter).show();
+			$("#live"+livesCounter).css('visibility', 'visible');
 			$("#song").get(0).pause();
 			$("#points").get(0).play();
 			setTimeout(()=>{$("#song").get(0).play();},400)
@@ -454,7 +454,7 @@ function updatePacmanPosition(){
 	if (board[shape.i][shape.j] == 14) {
 		if(livesCounter!=0)
 		{
-			$("#live"+livesCounter).hide();
+			$("#live"+livesCounter).css('visibility', 'hidden');
 			livesCounter--;
 			$("#song").get(0).pause();
 			$("#errorsong").get(0).play();
@@ -547,7 +547,7 @@ function updateMonsterPosition()
 		$("#song").get(0).pause();
 		$("#errorsong").get(0).play();
 		setTimeout(()=>{$("#song").get(0).play();},1000)
-		$("#live" +livesCounter).hide();
+		$("#live"+livesCounter).css('visibility', 'hidden');
 		livesCounter--;
 		score=score-10;
 		for(var j=0; j<monsters; j++)
@@ -809,6 +809,7 @@ gameOver = () =>{
 
 gameTimeOver = () =>{
 	endGame=true;
+	lblTime.value=0;
 	clearInterval(interval);
 	$("#song").get(0).pause();
 	if(score<100){
@@ -820,7 +821,7 @@ gameTimeOver = () =>{
 	$('#video1')[0].play();
 	}
 	else{
-	$('<p style=font-family:Bowlby One SC, cursive;  font-size:28px; color:white;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
+	$('<p style="font-family:Bowlby One SC, cursive;  font-size:28px; color:white;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
 	$('.GameOvermodal').show();
 	modal.classList.toggle("show-modal");
