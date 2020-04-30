@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="./Pages/Performence/performence.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
 	
-
+		<!--css import-->
 		<link rel="stylesheet" type="text/css" href="style.css"> 
 		<link rel="stylesheet" type="text/css" href="teststyle.css"> 
 		<!--jquery validate import-->
@@ -192,15 +192,15 @@
 						</div>
 					<div class=form-group-settings>
 						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 5 Points balls:</span>
-						<input type="color"  onchange="test(this)" placeholder=" 0" id="5balls" name="balls" />
+						<input type="color"   placeholder=" 0" id="5balls" name="balls" />
 					</div>
 					<div class=form-group-settings>
 						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 15 Points balls:</span>
-						<input type="color"  onchange="test(this)"  placeholder=" 0" id="15balls" name="balls" />
+						<input type="color"  placeholder=" 0" id="15balls" name="balls" />
 					</div>
 					<div class=form-group-settings>
 						<span style="font-size: 25px; font-family:bubble; color:white;">Choose color of 25 Points balls:</span>
-						<input type="color"  onchange="test(this)" placeholder=" 0" id="25balls" name="balls" />
+						<input type="color"   placeholder=" 0" id="25balls" name="balls" />
 					</div>
 					<input  style="text-align: right; top:-60px; display: inline-block; margin-left: 80%;"type="submit" class="btn1"  value="start"></input>
 				</div>
@@ -233,13 +233,13 @@
 		</audio>
 		<div id="game">
 			<div class="items">
-				<p  style="font-family:Bubble; color:white; font-size:28px; margin-left: 5%;" >Lives:
+				<p class="welcomemsg" id="or">welcome</p>
+				<p  style="font-family:Bubble; color:white; font-size:28px; margin-right: 5%;" >Lives:
 				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live1">
 				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live2">
 				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live3">
 				<img class="lives" src="./assets/img/logopac.png" alt="pacslogo" id="live4">
 				</p>
-				<p class="welcomemsg" id="or">welcome</p>
 			</div>
 			<canvas id="canvas" height="600px" width="1000px" style="border:1px solid #fff;">
 			<img src="./assets/img/pacright.png" id="right">

@@ -233,17 +233,16 @@ $( ".moveleft" ).keydown(function(e) {
   
 //Balls color change event
 
-  $('#5balls').change(function(){
-   smallColorBall=$(this).val();
-  });
 
-  $('#15balls').change(function(){
-    mediumColorBall=$(this).val();
-   });
-
-   $('#25balls').change(function(){
-    largeColorBall=$(this).val();
-   });
+$(document).on("change" , "#5balls" , function(){
+    smallColorBall=$(this).val();
+});
+$(document).on("change" , "#15balls" , function(){
+  mediumColorBall=$(this).val();
+});
+$(document).on("change" , "#25balls" , function(){
+ largeColorBall=$(this).val();
+});
 
    //Ball size
 
@@ -265,7 +264,6 @@ $( ".moveleft" ).keydown(function(e) {
         }); 
 
   longButton = otherButtons =>{
-    console.log(otherButtons)
     switch(otherButtons)
         {
             case(38):

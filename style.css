@@ -446,8 +446,7 @@ width:120px;
 
 .welcomemsg{
     font-family: 'Bubble';
-    font-size: 28px;
+    font-size: 32px;
     color:white;
-    text-align: left;
-    margin-right:5%
+    margin-left:5%;
 }
