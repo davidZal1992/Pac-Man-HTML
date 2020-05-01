@@ -448,6 +448,7 @@ width:120px;
     font-family: 'Bubble';
     font-size: 32px;
     color:white;
+    min-width: 200px;
     margin-left:5%;
 }
 

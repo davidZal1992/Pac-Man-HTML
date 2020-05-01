@@ -16,6 +16,7 @@ var score;
 var start_time;
 var time_elapsed;
 var interval;
+var gameTimer;
 
 //lives
 var livesCounter=4;
@@ -77,6 +78,7 @@ $(document).ready(function() {
 });
 
 function Start() {
+	gameTimer=timer;
 	var tempBalls=ballsMatch;
 	livesCounter=4;
 	window.addEventListener("keydown", function(e) {
@@ -265,7 +267,7 @@ function GetKeyPressed() {
 function Draw(x) {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = Math.floor(timer-time_elapsed)
+	lblTime.value = Math.floor(gameTimer-time_elapsed)
 	if(lblTime.value<60)
 	{
 		$("#lblTime").css('color','red');
@@ -448,7 +450,7 @@ function updatePacmanPosition(){
 	}
 	if (board[shape.i][shape.j] == 12) {
 		console.log('gotya')
-		timer=parseInt(timer)+30
+		gameTimer=parseInt(gameTimer)+30
 	}
 	if(board[shape.i][shape.j]==15)
 	{
@@ -486,7 +488,7 @@ function updatePacmanPosition(){
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = Math.floor(((currentTime - start_time) / 1000));
-	if(time_elapsed-timer>0)
+	if(time_elapsed-gameTimer>0)
 	{
 		gameTimeOver()
 	}

@@ -1,6 +1,13 @@
 $(document).ready(function() {
 $( "#homePage" ).click(function() {
   clearInterval(interval)
+  for(var i=1; i<=4; i++)
+  {
+    $("#live"+i).css('visibility', 'visible');
+  }
+  monsterShapes=[];
+  candyShapes=[];
+  candyStop=false;
   $("#song").get(0).pause();
   $('#startgame').hide();
     $('#box').children().hide();
@@ -11,7 +18,14 @@ $( "#homePage" ).click(function() {
 
   $( "#registerPage" ).click(function() {
     $('#startgame').hide();
-    clearInterval(interval)
+    for(var i=1; i<=4; i++)
+		{
+			$("#live"+i).css('visibility', 'visible');
+		}
+    clearInterval(interval);
+    monsterShapes=[];
+		candyShapes=[];
+		candyStop=false;
     $("#song").get(0).pause();
     $('#box').children().hide();
     $('#logo').show();
@@ -22,6 +36,13 @@ $( "#homePage" ).click(function() {
   $( "#loginPage" ).click(function() {
     $('#startgame').hide();
     clearInterval(interval)
+    monsterShapes=[];
+		candyShapes=[];
+		candyStop=false;
+    for(var i=1; i<=4; i++)
+		{
+			$("#live"+i).css('visibility', 'visible');
+		}
     $("#song").get(0).pause();
     $('#box').children().hide();
     $('#logo').show();
