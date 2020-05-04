@@ -484,7 +484,8 @@ $('#formsettings').submit(function(e){
    +Math.floor(ballsMatch*0.6)+' of 5 Pts color:<i style="color:'+smallColorBall+';"class="fas fa-circle"></i><br>'+
    +Math.floor(ballsMatch*0.3)+' of 15 Pts color:<i style="color:'+mediumColorBall+';"class="fas fa-circle"></i><br>'+
    +Math.floor(ballsMatch*0.1)+' of 25 Pts color: <i style="color:'+largeColorBall+';"class="fas fa-circle"></i><br>'+
-   'time: '+timer)
+   'Time: '+timer+'<br>'+
+   'Monsters: '+monsters);
    $('#startgame').show();
    $("#song").get(0).play();
    $('#video1')[0].play();

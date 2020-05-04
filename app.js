@@ -78,6 +78,8 @@ $(document).ready(function() {
 });
 
 function Start() {
+	$('#loser').show();
+	$('#winner').show();
 	gameTimer=timer;
 	var tempBalls=ballsMatch;
 	livesCounter=4;
@@ -861,7 +863,7 @@ gameTimeOver = () =>{
 	endGame=true;
 	lblTime.value=0;
 	clearInterval(interval);
-	$("#song").get(0).pause();
+	$("#song").attr("src", "");
 	if(score<100){
 	$('<p style="font-family:Bowlby One SC, cursive;  font-size:28px; color:white;">Score: <span style="color:orange">You are better than '+score+' points! </span></p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
@@ -884,7 +886,7 @@ gameTimeOver = () =>{
 gameWinner = () =>{
 
 	endGame=true;
-	$("#song").get(0).pause();
+	$("#song").attr("src", "");
 	clearInterval(interval);
 	$('<p style="font-family:Bowlby One SC, cursive; font-size:28px; color:white;">Score: <span style="color:orange">'+score+'</span><br>Winner!!!</p>').appendTo("#endPar")
 	var modal = document.querySelector(".GameOvermodal");
